@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.github
+.devcontainer
+__tests__
+*.md
+Dockerfile
+.dockerignore

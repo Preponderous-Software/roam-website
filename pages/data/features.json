@@ -1,0 +1,40 @@
+{
+  "features": [
+    {
+      "id": "world",
+      "icon": "public",
+      "title": "An endless world",
+      "description": "Every game generates a fresh, procedurally-built 2D world. Wander across grassland, forest, jungle and mountain biomes with no edge in sight."
+    },
+    {
+      "id": "survive",
+      "icon": "bolt",
+      "title": "Survive & explore",
+      "description": "Energy drains as you roam, so eat what you gather or hunt to keep going. A day/night cycle turns over the world while you push further out."
+    },
+    {
+      "id": "build",
+      "icon": "build",
+      "title": "Craft & build",
+      "description": "Gather wood and stone to craft floors, beds, fences, chests, campfires and torches — then carve a home out of the wilderness."
+    },
+    {
+      "id": "farm",
+      "icon": "agriculture",
+      "title": "Farm & forage",
+      "description": "Plant wheat, watch crops mature, and pick apples and bananas. Build a food supply so the next expedition lasts longer."
+    },
+    {
+      "id": "ecosystem",
+      "icon": "pets",
+      "title": "A living ecosystem",
+      "description": "Chickens, rabbits, deer, bears, wolves and snakes move, feed and reproduce on their own — the world keeps living whether you watch or not."
+    },
+    {
+      "id": "modes",
+      "icon": "terminal",
+      "title": "Two ways to play",
+      "description": "Play the full graphical game, or drop into the built-in text mode (--text) to roam from any terminal — over SSH, on a Chromebook, or headless."
+    }
+  ]
+}
