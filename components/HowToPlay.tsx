@@ -73,10 +73,11 @@ const HowToPlay: React.FC = () => (
                 </Mode>
             </Grid>
             <Grid item xs={12} md={4}>
-                <Mode icon={<PublicIcon/>} title="In your browser" badge="Coming soon">
+                <Mode icon={<PublicIcon/>} title="In your browser" badge="Live">
                     <Typography variant="body2" color="text.secondary">
-                        A play-in-the-browser build is in the works. Until then, the desktop and text
-                        modes above are the way to roam. Want to help make it happen?{' '}
+                        No download needed &mdash; roam right now in a{' '}
+                        <a href="/play">play-in-the-browser build</a>. Same game, running entirely
+                        client-side. Want to help make it better?{' '}
                         <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
                             Follow along on GitHub
                         </a>
