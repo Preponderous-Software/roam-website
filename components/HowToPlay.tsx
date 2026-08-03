@@ -73,11 +73,10 @@ const HowToPlay: React.FC = () => (
                 </Mode>
             </Grid>
             <Grid item xs={12} md={4}>
-                <Mode icon={<PublicIcon/>} title="In your browser" badge="Live">
+                <Mode icon={<PublicIcon/>} title="In your browser" badge="Planned">
                     <Typography variant="body2" color="text.secondary">
-                        No download needed &mdash; roam right now in a{' '}
-                        <a href="/play">play-in-the-browser build</a>. Same game, running entirely
-                        client-side. Want to help make it better?{' '}
+                        A play-in-the-browser build, running entirely client-side with no download
+                        needed, is on the roadmap. Want to help make it happen?{' '}
                         <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
                             Follow along on GitHub
                         </a>
