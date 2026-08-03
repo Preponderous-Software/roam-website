@@ -2,6 +2,14 @@
 
 All notable changes to the Roam website are documented here.
 
+## [Unreleased]
+
+### Fixed
+
+- "How to play" panel: the browser-play mode no longer links to a nonexistent `/play` page or
+  claims to be "Live" — it now reads "Planned", matching the roadmap framing already used in this
+  file and in `README.md`.
+
 ## [0.1.0] - 2026-06-21
 
 ### Added
