@@ -4,7 +4,15 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- Footer: a "Discord" link to the Preponderous community server, wired to the `DISCORD_URL`
+  constant that already existed in `utils/site.ts` but was never rendered anywhere on the site.
+
 ### Fixed
+
+- `CONFIG.md` no longer claims every download card links to the full releases page — that link
+  lives on the `Latest: v<version>` chip and on the Linux card, not on the Windows or macOS cards.
 
 - "How to play" panel: the browser-play mode no longer links to a nonexistent `/play` page or
   claims to be "Live" — it now reads "Planned", matching the roadmap framing already used in this
