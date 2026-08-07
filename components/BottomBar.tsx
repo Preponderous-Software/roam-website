@@ -4,7 +4,10 @@ import {ColorModeToggleSwitch} from './ColorModeToggleSwitch';
 import {ColorModeContext} from '../utils/ColorModeContext';
 import CodeIcon from '@mui/icons-material/Code';
 import BugReportIcon from '@mui/icons-material/BugReport';
-import {SITE_REPO_URL} from '../utils/site';
+// MUI ships Material Design glyphs, not brand logos, so the Discord invite uses
+// the closest-reading Material icon rather than the Discord mark.
+import ForumIcon from '@mui/icons-material/Forum';
+import {DISCORD_URL, SITE_REPO_URL} from '../utils/site';
 
 import {
     toolbarStyle,
@@ -37,7 +40,8 @@ interface BottomBarProps {
 
 // The footer version is this website's version (from package.json); the game's
 // own release version is shown on the download cards. Source Code / Report a Bug
-// point at this website's repo so feedback about the site lands in the right place.
+// point at this website's repo so feedback about the site lands in the right place,
+// while Discord points at the Preponderous community server shared by all the games.
 const BottomBar: React.FC<BottomBarProps> = ({version}) => {
     const colorMode = useContext(ColorModeContext);
     const theme = useTheme();
@@ -56,6 +60,9 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
                         </FooterButton>
                         <FooterButton href={`${SITE_REPO_URL}/issues/new`} icon={<BugReportIcon/>}>
                             Report a Bug
+                        </FooterButton>
+                        <FooterButton href={DISCORD_URL} icon={<ForumIcon/>}>
+                            Discord
                         </FooterButton>
                     </Box>
                 </Box>

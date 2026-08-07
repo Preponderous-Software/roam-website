@@ -24,12 +24,19 @@ convention is assumed to be stable across releases:
 | macOS             | `Roam-<version>.dmg` |
 | Linux             | run from source (links to the repo) |
 
-If the upstream asset names change, update `buildDownloads()` to match. Every card also links
-to the full releases page, so older/other builds are always reachable.
+If the upstream asset names change, update `buildDownloads()` to match.
+
+Older and other builds stay reachable through the full releases page, which is linked from the
+`Latest: v<version>` chip beside the "Download Roam" heading
+([`components/DownloadSection.tsx`](components/DownloadSection.tsx)) and again from the Linux
+card's "All releases" button. The Windows and macOS cards carry only their own assets.
 
 ## Off-site links
 
-Repo, releases, issues, and Discord URLs all live in [`utils/site.ts`](utils/site.ts).
+Repo, releases, issues, and Discord URLs all live in [`utils/site.ts`](utils/site.ts). The
+Discord invite (`DISCORD_URL`) is surfaced in the footer
+([`components/BottomBar.tsx`](components/BottomBar.tsx)) alongside the site's source and
+bug-report links.
 
 ## Feature cards (home page)
 
