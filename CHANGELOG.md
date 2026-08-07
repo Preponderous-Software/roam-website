@@ -13,7 +13,6 @@ All notable changes to the Roam website are documented here.
 
 - `CONFIG.md` no longer claims every download card links to the full releases page — that link
   lives on the `Latest: v<version>` chip and on the Linux card, not on the Windows or macOS cards.
-
 - "How to play" panel: the browser-play mode no longer links to a nonexistent `/play` page or
   claims to be "Live" — it now reads "Planned", matching the roadmap framing already used in this
   file and in `README.md`.
