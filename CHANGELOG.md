@@ -2,7 +2,10 @@
 
 All notable changes to the Roam website are documented here.
 
-## [Unreleased]
+## [0.2.0-SNAPSHOT-8-8-2026] – 2026-08-08
+
+### Changed
+- roam-website is now developed AI-first. Day-to-day feature work, grooming, review and maintenance run through AI agents working directly against this repository, with the maintainers setting direction and approving what lands. The version bump marks that change in how the project is built — it is not a break in behaviour, configuration or stored data, and existing installations can upgrade in place. Released as `0.2.0-SNAPSHOT-8-8-2026`: the AI-first line has not yet been verified in live operation, and the dated snapshot designation stays until it has.
 
 ### Added
 
