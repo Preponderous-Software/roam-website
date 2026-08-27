@@ -35,7 +35,12 @@ describe('Download page', () => {
 
     it('repeats the how-to-play panel below the grid', () => {
         render(<DownloadPage/>);
-        expect(screen.getByRole('heading', {name: 'How to play', level: 2})).toBeInTheDocument();
+        // getAllByRole returns nodes in document order, and the page chrome
+        // contributes no headings, so these are the page's sections top to bottom.
+        expect(screen.getAllByRole('heading', {level: 2}).map((heading) => heading.textContent)).toEqual([
+            'Download Roam',
+            'How to play',
+        ]);
     });
 
     it('wraps the sections in the standard site chrome', () => {

@@ -23,11 +23,15 @@ describe('Home page', () => {
         expect(screen.getByRole('link', {name: 'Download Roam'})).toHaveAttribute('href', '/download');
     });
 
-    it('assembles the features, showcase, and how-to-play sections beneath it', () => {
+    it('assembles the features, showcase, and how-to-play sections beneath it, in that order', () => {
         render(<Home/>);
-        expect(screen.getByRole('heading', {name: 'What you do in Roam', level: 2})).toBeInTheDocument();
-        expect(screen.getByRole('heading', {name: 'A peek at the world', level: 2})).toBeInTheDocument();
-        expect(screen.getByRole('heading', {name: 'How to play', level: 2})).toBeInTheDocument();
+        // getAllByRole returns nodes in document order, and the page chrome
+        // contributes no headings, so these are the page's sections top to bottom.
+        expect(screen.getAllByRole('heading', {level: 2}).map((heading) => heading.textContent)).toEqual([
+            'What you do in Roam',
+            'A peek at the world',
+            'How to play',
+        ]);
     });
 
     it('wraps the sections in the standard site chrome', () => {
