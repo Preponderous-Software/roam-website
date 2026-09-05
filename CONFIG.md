@@ -57,6 +57,9 @@ Images live in `public/`:
 - `roam-icon.png` — the game icon (logo + favicon)
 - `screenshots/*.png` — gameplay/minimap shots shown in the showcase
 - `sprites/*.png` — the game's 32×32 sprites used in the hero strip
+- `colormode/{light,dark}.svg` — the sun/moon glyphs painted onto the color-mode toggle
+  thumb by [`components/ColorModeToggleSwitch.tsx`](components/ColorModeToggleSwitch.tsx),
+  which `TopBar` and `BottomBar` render on every page
 
 Pixel art is rendered with `image-rendering: pixelated` so it stays crisp.
 
