@@ -1,8 +1,9 @@
 import {Html, Head, Main, NextScript} from 'next/document';
 
 // Load the brand fonts (Inter for body, Space Grotesk for headings) from Google
-// Fonts. Next 12 predates next/font, so they are linked here in the document
-// head; preconnect hints keep the extra round-trip cheap.
+// Fonts. They are linked here in the document head, with preconnect hints to
+// keep the extra round-trip cheap. next/font is available on Next 14 and moving
+// to it would be a separate, behaviour-changing step.
 export default function Document() {
     return (
         <Html lang="en">

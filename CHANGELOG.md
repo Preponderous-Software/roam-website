@@ -2,6 +2,16 @@
 
 All notable changes to the Roam website are documented here.
 
+## [Unreleased]
+
+### Changed
+
+- Upgraded the framework from Next.js 12.2.2 to 14.2.35, with React 18.3.1, TypeScript 5.4.5 and
+  the matching ESLint/type packages. The site stays on the `pages/` router and no source file
+  needed changing — nothing here imports `next/link`, so the Next 13 nested-anchor break does not
+  apply. `swcMinify: false` was dropped from `next.config.js` (SWC minification has been the
+  default since Next 13), and `engines.node` now records Next 14.2's floor of 18.17.
+
 ## [0.2.0-SNAPSHOT-8-8-2026] – 2026-08-08
 
 ### Changed
