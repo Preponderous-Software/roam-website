@@ -67,3 +67,17 @@ Pixel art is rendered with `image-rendering: pixelated` so it stays crisp.
 
 The MUI theme (palette, fonts, dark/light) is defined in
 [`pages/_app.tsx`](pages/_app.tsx), shared verbatim with the sibling Preponderous sites.
+
+## Usage reporting
+
+Three optional environment variables, read by the server at runtime only, control
+[usage reporting](README.md#usage-reporting):
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `USAGE_REPORTING_KEY` | unset — nothing is reported | The [trace](https://trace.danielstephenson.dev) write key for the `roam-website` program. Read by `middleware.ts` only: never inlined into the browser bundle and never committed; keep it in the deployment's environment. |
+| `USAGE_REPORTING_ENABLED` | `true` | Set to `false` to stop reporting page views even when a key is set. `TRACE_USAGE_REPORTING=off` and `DO_NOT_TRACK=1` do the same and win over it. |
+| `USAGE_REPORTING_ENDPOINT` | `https://trace.danielstephenson.dev` | The trace server page views are sent to. |
+
+A new page under `pages/` must also be added to `PAGE_ROUTES` in
+[`utils/page-view-policy.ts`](utils/page-view-policy.ts) to be counted; a test fails until it is.
