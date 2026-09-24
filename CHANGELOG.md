@@ -4,6 +4,16 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- Page views are reported to [trace](https://trace.danielstephenson.dev) as the program
+  `roam-website`: one `page-view` event per HTML page served, tagged with the path and the site version
+  only, sent server-side from `middleware.ts` (trace decision 0002). Crawlers, monitors,
+  prefetches, assets and 404s are skipped; nothing about the visitor is sent. The key is read from
+  `USAGE_REPORTING_KEY` only, and reporting is off without it, with `USAGE_REPORTING_ENABLED=false`,
+  `TRACE_USAGE_REPORTING=off` or `DO_NOT_TRACK=1`. The client is `trace-client.ts` 0.1.0 vendored
+  unmodified from `Stephenson-Software/trace-client-js`.
+
 ### Changed
 
 - Upgraded the framework from Next.js 12.2.2 to 14.2.35, with React 18.3.1, TypeScript 5.4.5 and
