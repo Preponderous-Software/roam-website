@@ -16,6 +16,13 @@ All notable changes to the Roam website are documented here.
 
 ### Changed
 
+- `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js`
+  0.2.0 (tag `0.2.0`, commit 69b494b), which checks `TRACE_USAGE_REPORTING` / `DO_NOT_TRACK` itself
+  and exposes `disabledReason`. `utils/usage-reporting.ts` now uses the client's
+  `TraceClient.environmentOptsOut` for that check instead of its own copy, and hands the client the
+  same two values explicitly so it never falls back to `process.env`; the switches, their order and
+  the logged reasons are unchanged.
+
 - Upgraded the framework from Next.js 12.2.2 to 14.2.35, with React 18.3.1, TypeScript 5.4.5 and
   the matching ESLint/type packages. The site stays on the `pages/` router and no source file
   needed changing — nothing here imports `next/link`, so the Next 13 nested-anchor break does not
