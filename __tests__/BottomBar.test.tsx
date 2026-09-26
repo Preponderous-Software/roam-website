@@ -33,6 +33,14 @@ describe('BottomBar', () => {
         }
     });
 
+    it('links back to danielstephenson.dev in the same tab', () => {
+        render(<BottomBar version="0.1.0"/>);
+        const link = screen.getByRole('link', {name: 'danielstephenson.dev'});
+        expect(link).toHaveAttribute('href', 'https://danielstephenson.dev');
+        expect(link).not.toHaveAttribute('target');
+        expect(link.parentElement).toHaveTextContent('More by Daniel Stephenson → danielstephenson.dev');
+    });
+
     it('renders the dark-mode toggle', () => {
         render(<BottomBar version="0.1.0"/>);
         expect(screen.getByLabelText('Toggle dark mode')).toBeInTheDocument();
