@@ -6,6 +6,8 @@ All notable changes to the Roam website are documented here.
 
 ### Added
 
+- The footer links back to [danielstephenson.dev](https://danielstephenson.dev)
+  ("More by Daniel Stephenson → danielstephenson.dev").
 - Page views are reported to [trace](https://trace.danielstephenson.dev) as the program
   `roam-website`: one `page-view` event per HTML page served, tagged with the path and the site version
   only, sent server-side from `middleware.ts` (trace decision 0002). Crawlers, monitors,

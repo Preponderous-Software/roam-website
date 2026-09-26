@@ -1,4 +1,4 @@
-import {AppBar, Box, Button, Toolbar, Typography, useTheme} from '@mui/material';
+import {AppBar, Box, Button, Link, Toolbar, Typography, useTheme} from '@mui/material';
 import React, {useContext} from 'react';
 import {ColorModeToggleSwitch} from './ColorModeToggleSwitch';
 import {ColorModeContext} from '../utils/ColorModeContext';
@@ -34,6 +34,14 @@ const VersionNumber: React.FC<{ version: string }> = ({version}) => (
     </Typography>
 );
 
+// A quiet same-tab link back to the author's portfolio, shared across his sites.
+const PortfolioLink: React.FC = () => (
+    <Typography variant="body2" color="inherit" component="div" sx={{opacity: 0.8}}>
+        More by Daniel Stephenson →{' '}
+        <Link href="https://danielstephenson.dev" color="inherit">danielstephenson.dev</Link>
+    </Typography>
+);
+
 interface BottomBarProps {
     version: string;
 }
@@ -52,6 +60,7 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
                 <Box sx={(theme) => flexContainerStyle(theme)}>
                     <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
                         <VersionNumber version={version}/>
+                        <PortfolioLink/>
                     </Box>
 
                     <Box sx={(theme) => flexContainerStyle(theme, {gap: 1})}>
