@@ -11,6 +11,10 @@ export const RELEASES_URL = `${REPO_URL}/releases`;
 export const LATEST_RELEASE_URL = `${REPO_URL}/releases/latest`;
 export const DISCORD_URL = 'https://discord.gg/49J4RHQxhy';
 
+// The in-browser (Pyodide) build of Roam. Served on this same host but outside
+// this Next.js app, so it is linked as a plain same-tab path.
+export const PLAY_URL = '/play';
+
 // The Roam release the prominent "Download" buttons resolve to. The game itself
 // is versioned independently of this website; keep this in step with the latest
 // published release tag at https://github.com/Preponderous-Software/roam/releases.

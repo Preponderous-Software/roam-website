@@ -1,5 +1,6 @@
 import type {NextPage} from 'next';
-import {Box, Container, Typography} from '@mui/material';
+import {Box, Button, Container, Typography} from '@mui/material';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import React from 'react';
 import Seo from '../components/Seo';
 import TopBar from '../components/TopBar';
@@ -8,6 +9,7 @@ import DownloadSection from '../components/DownloadSection';
 import HowToPlay from '../components/HowToPlay';
 import SectionDivider from '../components/SectionDivider';
 import {pageStyle} from '../styles/styles';
+import {PLAY_URL} from '../utils/site';
 
 const version = require('../package.json').version;
 
@@ -27,6 +29,15 @@ const DownloadPage: NextPage = () => (
                     Pick your platform and start exploring. Every release is published on GitHub
                     with notes on what changed.
                 </Typography>
+                <Button
+                    variant="outlined"
+                    size="large"
+                    startIcon={<PlayArrowIcon/>}
+                    href={PLAY_URL}
+                    sx={{mt: 3}}
+                >
+                    Or play in browser
+                </Button>
             </Box>
             <DownloadSection/>
             <SectionDivider/>

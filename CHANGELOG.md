@@ -6,6 +6,10 @@ All notable changes to the Roam website are documented here.
 
 ### Added
 
+- "Play in browser" links to the now-live in-browser (Pyodide) build of Roam at `/play`: a button in
+  the home hero, one under the download page's intro, and one in the "How to play" panel, whose
+  browser mode no longer reads "Planned" and instead says what is true of it (runs in the browser via
+  WebAssembly, first load downloads the game, saves live in that browser).
 - The footer links back to [danielstephenson.dev](https://danielstephenson.dev)
   ("More by Daniel Stephenson → danielstephenson.dev").
 - Page views are reported to [trace](https://trace.danielstephenson.dev) as the program

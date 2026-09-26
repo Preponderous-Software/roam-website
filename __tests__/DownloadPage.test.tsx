@@ -24,6 +24,15 @@ describe('Download page', () => {
         expect(screen.getByText(/Pick your platform and start exploring/)).toBeInTheDocument();
     });
 
+    it('offers playing in the browser at /play alongside the downloads', () => {
+        render(<DownloadPage/>);
+        const play = screen.getByRole('link', {name: 'Or play in browser'});
+        expect(play).toHaveAttribute('href', '/play');
+        expect(play).not.toHaveAttribute('target');
+        // The how-to-play panel repeats the call to action for the browser mode.
+        expect(screen.getByRole('link', {name: 'Play in browser'})).toHaveAttribute('href', '/play');
+    });
+
     it('renders the platform grid for the version in utils/site.ts', () => {
         render(<DownloadPage/>);
         expect(screen.getByRole('heading', {name: 'Download Roam', level: 2})).toBeInTheDocument();

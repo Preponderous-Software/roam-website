@@ -2,7 +2,7 @@ import {describe, expect, it} from 'vitest';
 import {render, screen} from '@testing-library/react';
 import React from 'react';
 import HowToPlay from '../components/HowToPlay';
-import {REPO_URL} from '../utils/site';
+import {PLAY_URL} from '../utils/site';
 
 describe('HowToPlay', () => {
     it('renders all three modes', () => {
@@ -17,20 +17,19 @@ describe('HowToPlay', () => {
         expect(screen.getByText('python src/roam.py --text')).toBeInTheDocument();
     });
 
-    it('labels the browser mode as planned rather than live, with no link to a nonexistent /play route', () => {
+    it('describes the browser mode as live rather than planned', () => {
         render(<HowToPlay/>);
-        expect(screen.getByText('Planned')).toBeInTheDocument();
-        expect(screen.queryByText('Live')).not.toBeInTheDocument();
-        for (const link of screen.getAllByRole('link')) {
-            expect(link).not.toHaveAttribute('href', '/play');
-        }
+        expect(screen.queryByText('Planned')).not.toBeInTheDocument();
+        expect(screen.getByText('No install')).toBeInTheDocument();
+        expect(screen.getByText(/runs entirely in your browser via WebAssembly/)).toBeInTheDocument();
+        expect(screen.getByText(/Saves are stored in\s+this browser/)).toBeInTheDocument();
     });
 
-    it('links to GitHub from the browser mode, opening in a new tab', () => {
+    it('links the browser mode to /play in the same tab', () => {
         render(<HowToPlay/>);
-        const github = screen.getByRole('link', {name: 'Follow along on GitHub'});
-        expect(github).toHaveAttribute('href', REPO_URL);
-        expect(github).toHaveAttribute('target', '_blank');
-        expect(github).toHaveAttribute('rel', 'noopener noreferrer');
+        const play = screen.getByRole('link', {name: 'Play in browser'});
+        expect(play).toHaveAttribute('href', PLAY_URL);
+        expect(PLAY_URL).toBe('/play');
+        expect(play).not.toHaveAttribute('target');
     });
 });

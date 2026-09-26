@@ -1,10 +1,11 @@
-import {Box, Chip, Grid, Paper, Stack, Typography} from '@mui/material';
+import {Box, Button, Chip, Grid, Paper, Stack, Typography} from '@mui/material';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
 import TerminalIcon from '@mui/icons-material/Terminal';
 import PublicIcon from '@mui/icons-material/Public';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import React from 'react';
 import {sectionHeaderStyle} from '../styles/styles';
-import {REPO_URL} from '../utils/site';
+import {PLAY_URL, REPO_URL} from '../utils/site';
 
 // A monospace command block for the copy-pasteable launch commands.
 const Command: React.FC<{ children: React.ReactNode }> = ({children}) => (
@@ -73,15 +74,21 @@ const HowToPlay: React.FC = () => (
                 </Mode>
             </Grid>
             <Grid item xs={12} md={4}>
-                <Mode icon={<PublicIcon/>} title="In your browser" badge="Planned">
+                <Mode icon={<PublicIcon/>} title="In your browser" badge="No install">
                     <Typography variant="body2" color="text.secondary">
-                        A play-in-the-browser build, running entirely client-side with no download
-                        needed, is on the roadmap. Want to help make it happen?{' '}
-                        <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-                            Follow along on GitHub
-                        </a>
-                        .
+                        Roam runs entirely in your browser via WebAssembly — no install needed. The
+                        first load downloads the game, so it may take a moment. Saves are stored in
+                        this browser, so clearing its site data clears them. Needs a modern browser;
+                        touch devices get on-screen controls.
                     </Typography>
+                    <Button
+                        variant="contained"
+                        startIcon={<PlayArrowIcon/>}
+                        href={PLAY_URL}
+                        sx={{mt: 2}}
+                    >
+                        Play in browser
+                    </Button>
                 </Mode>
             </Grid>
         </Grid>

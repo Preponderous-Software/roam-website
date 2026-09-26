@@ -11,8 +11,8 @@ color-mode toggle, chrome, and Docker/CI setup.
 
 ## What's on it
 
-- **Home** (`/`) — hero, an at-a-glance feature grid, in-game screenshots, and a "how to play"
-  panel (desktop, terminal/text mode, and a flagged browser-play follow-up).
+- **Home** (`/`) — hero (with a "Play in browser" link to `/play`), an at-a-glance feature grid,
+  in-game screenshots, and a "how to play" panel (desktop, terminal/text mode, and in the browser).
 - **Download** (`/download`) — platform cards linking to the latest GitHub release assets
   (Windows installer + portable zip, macOS `.dmg`, and run-from-source for Linux).
 
