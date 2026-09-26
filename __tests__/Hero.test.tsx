@@ -2,7 +2,7 @@ import {describe, expect, it} from 'vitest';
 import {render, screen} from '@testing-library/react';
 import React from 'react';
 import Hero from '../components/Hero';
-import {REPO_URL} from '../utils/site';
+import {PLAY_URL, REPO_URL} from '../utils/site';
 
 describe('Hero', () => {
     it('names the game as the page-level heading', () => {
@@ -16,6 +16,14 @@ describe('Hero', () => {
         expect(download).toHaveAttribute('href', '/download');
         // An in-site route navigates in the same tab, unlike the source link below.
         expect(download).not.toHaveAttribute('target');
+    });
+
+    it('offers playing in the browser at /play, in the same tab', () => {
+        render(<Hero/>);
+        const play = screen.getByRole('link', {name: 'Play in browser'});
+        expect(play).toHaveAttribute('href', '/play');
+        expect(play).toHaveAttribute('href', PLAY_URL);
+        expect(play).not.toHaveAttribute('target');
     });
 
     it('opens the source link off-site safely', () => {

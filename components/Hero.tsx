@@ -1,12 +1,13 @@
 import {Box, Button, Stack, Typography} from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import React from 'react';
 import SpriteStrip from './SpriteStrip';
-import {REPO_URL} from '../utils/site';
+import {PLAY_URL, REPO_URL} from '../utils/site';
 
-// Landing hero: the game name, its one-line pitch, the two primary calls to
-// action (download / source), and a strip of the game's own sprites underneath.
+// Landing hero: the game name, its one-line pitch, the calls to action
+// (play in the browser / download / source), and a strip of the game's own sprites underneath.
 const Hero: React.FC = () => (
     <Box sx={{textAlign: 'center', py: {xs: 5, md: 9}}}>
         <Box
@@ -32,6 +33,9 @@ const Hero: React.FC = () => (
             surroundings — survive, craft, farm, and build a home in the wild.
         </Typography>
         <Stack direction={{xs: 'column', sm: 'row'}} spacing={2} justifyContent="center" sx={{mt: 4}}>
+            <Button variant="contained" size="large" startIcon={<PlayArrowIcon/>} href={PLAY_URL}>
+                Play in browser
+            </Button>
             <Button variant="contained" size="large" startIcon={<DownloadIcon/>} href="/download">
                 Download Roam
             </Button>
