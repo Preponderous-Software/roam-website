@@ -34,7 +34,7 @@ const VersionNumber: React.FC<{ version: string }> = ({version}) => (
     </Typography>
 );
 
-// A quiet same-tab link back to the author's portfolio, shared across his sites.
+// A quiet same-tab link back to the author's portfolio, shared across the author's sites.
 const PortfolioLink: React.FC = () => (
     <Typography variant="body2" color="inherit" component="div" sx={{opacity: 0.8}}>
         More by Daniel Stephenson →{' '}
@@ -58,7 +58,7 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
         <AppBar position="static" sx={(theme) => bottomAppBarStyle(theme)}>
             <Toolbar sx={(theme) => toolbarStyle(theme)}>
                 <Box sx={(theme) => flexContainerStyle(theme)}>
-                    <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
+                    <Box sx={{display: 'flex', alignItems: 'center', flexWrap: 'wrap', columnGap: 2, rowGap: 0.5}}>
                         <VersionNumber version={version}/>
                         <PortfolioLink/>
                     </Box>
