@@ -29,6 +29,12 @@ All notable changes to the Roam website are documented here.
   apply. `swcMinify: false` was dropped from `next.config.js` (SWC minification has been the
   default since Next 13), and `engines.node` now records Next 14.2's floor of 18.17.
 
+### Fixed
+
+- `README.md`'s usage-reporting section gave `/about` as an example of a reported path, but the
+  site has no `/about` page — it would render the 404 and not be reported. The example is now
+  `/download`, one of the routes in `PAGE_ROUTES`.
+
 ## [0.2.0-SNAPSHOT-8-8-2026] – 2026-08-08
 
 ### Changed
