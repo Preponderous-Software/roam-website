@@ -56,7 +56,7 @@ Preponderous sites.
 
 When the server is given a trace key in `USAGE_REPORTING_KEY`, it reports one `page-view` event per
 HTML page it serves to [trace](https://trace.danielstephenson.dev), as the program `roam-website`,
-carrying the page's path (for example `/about` — never a query string or fragment) and the site
+carrying the page's path (for example `/download` — never a query string or fragment) and the site
 version. Nothing about the visitor is sent: no IP address, user agent, cookie, session, account or
 referrer. No script is added to any page — the report is made by the server (Next.js middleware),
 so the key never reaches the browser — and crawlers, uptime monitors, prefetches, API calls,
