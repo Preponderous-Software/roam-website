@@ -23,6 +23,12 @@ All notable changes to the Roam website are documented here.
 ### Changed
 
 - `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js`
+  0.3.0, which requires the program version when the client is constructed and tags every event
+  with it. `utils/usage-reporting.ts` passes the site version from `package.json` (`"unknown"` if
+  blank, so building the client never throws), and `pageViewTags()` no longer adds `version` itself;
+  a `page-view` still carries exactly `page` and `version`.
+
+- `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js`
   0.2.0 (tag `0.2.0`, commit 69b494b), which checks `TRACE_USAGE_REPORTING` / `DO_NOT_TRACK` itself
   and exposes `disabledReason`. `utils/usage-reporting.ts` now uses the client's
   `TraceClient.environmentOptsOut` for that check instead of its own copy, and hands the client the
