@@ -43,6 +43,9 @@ All notable changes to the Roam website are documented here.
 
 ### Fixed
 
+- `CONFIG.md`'s "Off-site links" section left out `PLAY_URL`, the `/play` path that the three
+  "Play in browser" links use, and did not mention the footer's danielstephenson.dev link, which
+  is written into `BottomBar.tsx` instead of `utils/site.ts`. The section now covers both.
 - `README.md`'s usage-reporting section gave `/about` as an example of a reported path, but the
   site has no `/about` page — it would render the 404 and not be reported. The example is now
   `/download`, one of the routes in `PAGE_ROUTES`.

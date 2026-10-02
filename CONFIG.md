@@ -38,6 +38,16 @@ Discord invite (`DISCORD_URL`) is surfaced in the footer
 ([`components/BottomBar.tsx`](components/BottomBar.tsx)) alongside the site's source and
 bug-report links.
 
+The in-browser build's path, `PLAY_URL` (`/play`), lives there too. That build is served on this
+same host but outside this Next.js app, so it is linked as a plain same-tab path from the home
+hero ([`components/Hero.tsx`](components/Hero.tsx)), the download page
+([`pages/download.tsx`](pages/download.tsx)), and the "How to play" panel
+([`components/HowToPlay.tsx`](components/HowToPlay.tsx)).
+
+The one link not in `utils/site.ts` is the footer's "More by Daniel Stephenson →
+danielstephenson.dev" portfolio link, which is written directly into `BottomBar.tsx` because
+the same link appears on all of the author's sites.
+
 ## Feature cards (home page)
 
 The "What you do in Roam" grid is data-driven:
