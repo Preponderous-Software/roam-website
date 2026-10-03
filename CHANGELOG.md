@@ -22,6 +22,7 @@ All notable changes to the Roam website are documented here.
 
 ### Changed
 
+- `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js` 0.4.0 (tag `0.4.0`, commit 1b4d0fb). Every page view now carries a random installation ID for the server as the tag `install`, so trace can count installations rather than events: `TRACE_INSTALL_ID` when set, otherwise the client's `installIdFile` option pointed at `$XDG_DATA_HOME/roam-website/trace-install-id` (or `~/.local/share/...`). The report runs in the Edge runtime, which has no `node:fs`, so without `TRACE_INSTALL_ID` the ID lasts for the server process. The opt-outs stop it: a disabled client never makes, reads or writes one. `next build` now prints the client's expected "Node.js API is used (process.getBuiltinModule)" Edge warning; the client guards the call.
 - `utils/trace-client.ts` is re-vendored unmodified from `Stephenson-Software/trace-client-js`
   0.3.0, which requires the program version when the client is constructed and tags every event
   with it. `utils/usage-reporting.ts` passes the site version from `package.json` (`"unknown"` if
