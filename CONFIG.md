@@ -88,6 +88,7 @@ Three optional environment variables, read by the server at runtime only, contro
 | `USAGE_REPORTING_KEY` | unset — nothing is reported | The [trace](https://trace.danielstephenson.dev) write key for the `roam-website` program. Read by `middleware.ts` only: never inlined into the browser bundle and never committed; keep it in the deployment's environment. |
 | `USAGE_REPORTING_ENABLED` | `true` | Set to `false` to stop reporting page views even when a key is set. `TRACE_USAGE_REPORTING=off` and `DO_NOT_TRACK=1` do the same and win over it. |
 | `USAGE_REPORTING_ENDPOINT` | `https://trace.danielstephenson.dev` | The trace server page views are sent to. |
+| `TRACE_INSTALL_ID` | unset — a random ID per server process | The installation ID every page view carries as the tag `install`, so trace can count installations rather than events. Unset, the trace client is pointed at `$XDG_DATA_HOME/roam-website/trace-install-id` (or `$HOME/.local/share/...`), but the report runs in the Edge runtime, which has no file system, so the client makes a random ID that lasts until the server restarts. Set it to keep one ID across restarts and redeploys. Ignored when reporting is off. |
 
 A new page under `pages/` must also be added to `PAGE_ROUTES` in
 [`utils/page-view-policy.ts`](utils/page-view-policy.ts) to be counted; a test fails until it is.
