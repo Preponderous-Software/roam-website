@@ -6,6 +6,7 @@ All notable changes to the Roam website are documented here.
 
 ### Added
 
+- `GET /version.json` answers `{"version": "<version>"}` with the `version` field of `package.json` as it stood when the site was built (`pages/api/version.ts`, bundled at build time and reached through a rewrite in `next.config.js`), sent with `Cache-Control: no-store`, so a deploy can be verified by the version it reports. It needs no login and is outside the page-view middleware's matcher.
 - "Play in browser" links to the now-live in-browser (Pyodide) build of Roam at `/play`: a button in
   the home hero, one under the download page's intro, and one in the "How to play" panel, whose
   browser mode no longer reads "Planned" and instead says what is true of it (runs in the browser via
