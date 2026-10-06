@@ -39,4 +39,29 @@ describe('Seo', () => {
         );
         expect(container.querySelector('meta[name="twitter:title"]')).toHaveAttribute('content', 'Download — Roam');
     });
+
+    it('emits a canonical link and og:url at the production origin when given a path', () => {
+        const {container} = render(<Seo title="Download" path="/download"/>);
+        expect(container.querySelector('link[rel="canonical"]')).toHaveAttribute(
+            'href',
+            'https://roam.preponderous.org/download'
+        );
+        expect(container.querySelector('meta[property="og:url"]')).toHaveAttribute(
+            'content',
+            'https://roam.preponderous.org/download'
+        );
+    });
+
+    it('omits the canonical link and og:url when no path is given (error pages)', () => {
+        const {container} = render(<Seo title="404 — Not found"/>);
+        expect(container.querySelector('link[rel="canonical"]')).toBeNull();
+        expect(container.querySelector('meta[property="og:url"]')).toBeNull();
+    });
+
+    it('uses an absolute production URL for the share image', () => {
+        const {container} = render(<Seo/>);
+        const image = 'https://roam.preponderous.org/screenshots/house.png';
+        expect(container.querySelector('meta[property="og:image"]')).toHaveAttribute('content', image);
+        expect(container.querySelector('meta[name="twitter:image"]')).toHaveAttribute('content', image);
+    });
 });

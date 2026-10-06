@@ -44,6 +44,10 @@ hero ([`components/Hero.tsx`](components/Hero.tsx)), the download page
 ([`pages/download.tsx`](pages/download.tsx)), and the "How to play" panel
 ([`components/HowToPlay.tsx`](components/HowToPlay.tsx)).
 
+`SITE_ORIGIN` (`https://roam.preponderous.org`) is the production origin that canonical links,
+`og:url`, the absolute share-image URLs, `/sitemap.xml` and `public/robots.txt` are built from. A
+new page passes its own `path` to `<Seo>` and is added to `SITEMAP_PATHS` beside it.
+
 The one link not in `utils/site.ts` is the footer's "More by Daniel Stephenson →
 danielstephenson.dev" portfolio link, which is written directly into `BottomBar.tsx` because
 the same link appears on all of the author's sites.

@@ -15,6 +15,20 @@ export const DISCORD_URL = 'https://discord.gg/49J4RHQxhy';
 // this Next.js app, so it is linked as a plain same-tab path.
 export const PLAY_URL = '/play';
 
+// The production origin. Canonical links, og:url, absolute og:image URLs, the
+// sitemap and robots.txt are all built from it. It is a constant rather than a
+// build-time env var so a build made without one can never advertise localhost.
+export const SITE_ORIGIN = 'https://roam.preponderous.org';
+
+// Turns a site path (e.g. "/download") into an absolute production URL.
+export const absoluteUrl = (path: string): string =>
+    `${SITE_ORIGIN}${path.startsWith('/') ? path : `/${path}`}`;
+
+// Every indexable page on this host, listed in /sitemap.xml. PLAY_URL is served
+// by the separate in-browser build container on this same host, not by this
+// app, but it is a page of the site so it belongs in the sitemap too.
+export const SITEMAP_PATHS: readonly string[] = ['/', '/download', PLAY_URL];
+
 // The Roam release the prominent "Download" buttons resolve to. The game itself
 // is versioned independently of this website; keep this in step with the latest
 // published release tag at https://github.com/Preponderous-Software/roam/releases.
