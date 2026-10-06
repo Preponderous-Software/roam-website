@@ -15,7 +15,7 @@ const version = require('../package.json').version;
 
 const Home: NextPage = () => (
     <Box sx={(theme) => pageStyle(theme)}>
-        <Seo/>
+        <Seo path="/"/>
         <TopBar/>
         <Container component="main" id="main" maxWidth="lg" sx={{py: 4, flexGrow: 1}}>
             <Hero/>
