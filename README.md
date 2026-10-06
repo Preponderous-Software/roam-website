@@ -50,7 +50,8 @@ docker compose up --build   # serves on :3000
 ```
 
 It is intended to deploy behind the Preponderous gateway nginx box alongside the other
-Preponderous sites.
+Preponderous sites, served at `https://roam.preponderous.org` (`SITE_ORIGIN` in
+[`utils/site.ts`](utils/site.ts)).
 
 ## Usage reporting
 

@@ -69,7 +69,9 @@ Each entry has `id`, `icon`, `title`, and `description`. `icon` is one of the ke
 Images live in `public/`:
 
 - `roam-icon.png` — the game icon (logo + favicon)
-- `screenshots/*.png` — gameplay/minimap shots shown in the showcase
+- `screenshots/*.png` — gameplay/minimap shots shown in the showcase; `screenshots/house.png`
+  is also the share image (`og:image`/`twitter:image`) set by
+  [`components/Seo.tsx`](components/Seo.tsx)
 - `sprites/*.png` — the game's 32×32 sprites used in the hero strip
 - `colormode/{light,dark}.svg` — the sun/moon glyphs painted onto the color-mode toggle
   thumb by [`components/ColorModeToggleSwitch.tsx`](components/ColorModeToggleSwitch.tsx),
@@ -84,7 +86,7 @@ The MUI theme (palette, fonts, dark/light) is defined in
 
 ## Usage reporting
 
-Three optional environment variables, read by the server at runtime only, control
+Four optional environment variables, read by the server at runtime only, control
 [usage reporting](README.md#usage-reporting):
 
 | Variable | Default | Purpose |
