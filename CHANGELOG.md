@@ -4,9 +4,16 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-07
+
 ### Added
 
 - Search and share metadata at the production origin `https://roam.preponderous.org` (`SITE_ORIGIN` in `utils/site.ts`, a constant so no build can advertise localhost): the home and download pages carry `<link rel="canonical">` and `og:url`; `og:image`/`twitter:image` are now absolute URLs; `public/robots.txt` allows all crawlers and names the sitemap; `GET /sitemap.xml` (`pages/api/sitemap.ts`, reached through a rewrite) lists `/`, `/download` and the in-browser build at `/play` from `SITEMAP_PATHS`. Error pages emit no canonical link.
+
+## [0.2.0] - 2026-10-04
+
+### Added
+
 - `GET /version.json` answers `{"version": "<version>"}` with the `version` field of `package.json` as it stood when the site was built (`pages/api/version.ts`, bundled at build time and reached through a rewrite in `next.config.js`), sent with `Cache-Control: no-store`, so a deploy can be verified by the version it reports. It needs no login and is outside the page-view middleware's matcher.
 - "Play in browser" links to the now-live in-browser (Pyodide) build of Roam at `/play`: a button in
   the home hero, one under the download page's intro, and one in the "How to play" panel, whose
