@@ -7,7 +7,7 @@ import BugReportIcon from '@mui/icons-material/BugReport';
 // MUI ships Material Design glyphs, not brand logos, so the Discord invite uses
 // the closest-reading Material icon rather than the Discord mark.
 import ForumIcon from '@mui/icons-material/Forum';
-import {DISCORD_URL, SITE_REPO_URL} from '../utils/site';
+import {DISCORD_URL, SITE_NEW_ISSUE_URL, SITE_REPO_URL} from '../utils/site';
 
 import {
     toolbarStyle,
@@ -67,7 +67,7 @@ const BottomBar: React.FC<BottomBarProps> = ({version}) => {
                         <FooterButton href={SITE_REPO_URL} icon={<CodeIcon/>}>
                             Source Code
                         </FooterButton>
-                        <FooterButton href={`${SITE_REPO_URL}/issues/new`} icon={<BugReportIcon/>}>
+                        <FooterButton href={SITE_NEW_ISSUE_URL} icon={<BugReportIcon/>}>
                             Report a Bug
                         </FooterButton>
                         <FooterButton href={DISCORD_URL} icon={<ForumIcon/>}>
