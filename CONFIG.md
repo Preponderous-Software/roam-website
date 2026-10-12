@@ -34,9 +34,12 @@ card's "All releases" button. The Windows and macOS cards carry only their own a
 ## Off-site links
 
 Repo, releases, issues, and Discord URLs all live in [`utils/site.ts`](utils/site.ts). The
-Discord invite (`DISCORD_URL`) is surfaced in the footer
-([`components/BottomBar.tsx`](components/BottomBar.tsx)) alongside the site's source and
-bug-report links.
+game's repo (`REPO_URL`) is linked from the top bar's "GitHub" button, the hero, the "How to
+play" panel and the Linux download card; its releases page (`RELEASES_URL`) from the download
+section's `Latest` chip and the Linux card. The footer
+([`components/BottomBar.tsx`](components/BottomBar.tsx)) links this website's own repo
+(`SITE_REPO_URL`), its new-issue page for bug reports (`SITE_NEW_ISSUE_URL`), and the Discord
+invite (`DISCORD_URL`).
 
 The in-browser build's path, `PLAY_URL` (`/play`), lives there too. That build is served on this
 same host but outside this Next.js app, so it is linked as a plain same-tab path from the home
