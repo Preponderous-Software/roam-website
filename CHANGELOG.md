@@ -4,6 +4,8 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-14
+
 ### Fixed
 
 - `CONFIG.md`'s "Off-site links" section said the issues URLs live in `utils/site.ts`, but the footer's "Report a Bug" link was built inline in `BottomBar.tsx`, and the `ISSUES_URL`/`NEW_ISSUE_URL` that were there (for the game's repo) were used nowhere. The link is now `SITE_NEW_ISSUE_URL` in `utils/site.ts`; the unused `ORG_URL`, `ISSUES_URL`, `NEW_ISSUE_URL` and `LATEST_RELEASE_URL` are removed; and the section names each URL constant and where it is shown.
