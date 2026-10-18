@@ -4,6 +4,19 @@ The marketing and download site for [**Roam**](https://github.com/Preponderous-S
 a free, source-available survival game by Preponderous Software where you explore a
 procedurally-generated 2D world and interact with your surroundings.
 
+<p align="center">
+  <img src="docs/images/home-desktop.png" alt="The Roam website home page: the Roam icon, tagline, Play in browser / Download Roam / View Source buttons and a row of in-game sprites" width="640">
+  <img src="docs/images/home-mobile.png" alt="The same home page at phone width, with the buttons stacked" width="160">
+</p>
+<p align="center"><em>The live site at <a href="https://roam.preponderous.org">roam.preponderous.org</a>, desktop and phone width.</em></p>
+
+<p align="center">
+  <img src="docs/images/play-in-browser.gif" alt="Roam running in the browser at /play: the save is loaded and the player walks around the starting house while chickens and rabbits wander" width="560">
+</p>
+<p align="center"><em>The <code>/play</code> page: the real game running in the browser via Pyodide.</em></p>
+
+<sub>How these were captured: headless Chromium (Playwright) against the live site on 2026-10-18 at 1280×800 and 390×844; the GIF is a sequence of real screenshots of <code>/play</code> taken while WASD was held.</sub>
+
 The site is a small [Next.js](https://nextjs.org/) + [MUI](https://mui.com/) app, built as
 a sibling of [preponderous-dot-org](https://github.com/Preponderous-Software/preponderous-dot-org)
 and [dansplugins-dot-com](https://github.com/Dans-Plugins/dansplugins-dot-com) — same theme,
