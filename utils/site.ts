@@ -30,9 +30,9 @@ export const SITEMAP_PATHS: readonly string[] = ['/', '/download', PLAY_URL];
 // The Roam release the prominent "Download" buttons resolve to. The game itself
 // is versioned independently of this website; keep this in step with the latest
 // published release tag at https://github.com/Preponderous-Software/roam/releases.
-export const LATEST_VERSION = '0.12.0';
+export const LATEST_VERSION = '0.13.0';
 
 // GitHub serves a release's uploaded asset at this stable path. Asset names embed
-// the version (e.g. Roam-0.12.0-Setup.exe), so the URL is built from both.
+// the version (e.g. Roam-0.13.0-Setup.exe), so the URL is built from both.
 export const releaseAssetUrl = (version: string, filename: string): string =>
     `${REPO_URL}/releases/download/${version}/${filename}`;

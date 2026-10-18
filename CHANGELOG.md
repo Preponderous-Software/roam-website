@@ -4,6 +4,10 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- The download buttons now point at Roam 0.13.0 (`LATEST_VERSION` in `utils/site.ts`): the Windows installer, Windows portable zip and macOS disk image all resolve to the 0.13.0 release assets.
+
 ## [0.3.1] - 2026-10-14
 
 ### Fixed
