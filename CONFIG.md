@@ -10,7 +10,7 @@ version ships:
 
 ```ts
 // utils/site.ts
-export const LATEST_VERSION = '0.12.0';
+export const LATEST_VERSION = '0.13.0';
 ```
 
 `buildDownloads()` ([`utils/downloads.ts`](utils/downloads.ts)) builds the direct GitHub
