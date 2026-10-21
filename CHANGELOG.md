@@ -4,6 +4,10 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+### Fixed
+
+- `README.md` and `CONFIG.md` said only `USAGE_REPORTING_ENABLED=false` turns usage reporting off, but `utils/usage-reporting.ts` also accepts `0`, `no` and `off`, case-insensitively and with surrounding space ignored. Both now list every accepted value.
+
 ## [0.3.2] - 2026-10-20
 
 ### Changed
