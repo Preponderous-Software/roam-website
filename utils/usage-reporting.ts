@@ -75,7 +75,10 @@ export function disabledReason(env: UsageReportingEnv): DisabledReason | null {
     return null;
 }
 
-/** The one line logged when the client is built. None when there is no key, so an unconfigured site stays quiet. */
+/**
+ * The one line logged when the client is built. None when the missing key is the reason reporting
+ * is off, so an unconfigured site stays quiet; an opt-out switch is still reported without a key.
+ */
 export function startupLine(env: UsageReportingEnv): string | null {
     const reason = disabledReason(env);
     if (reason === 'no key') return null;

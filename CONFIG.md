@@ -65,7 +65,8 @@ pages/data/features.json
 
 Each entry has `id`, `icon`, `title`, and `description`. `icon` is one of the keys mapped in
 [`components/FeaturesSection.tsx`](components/FeaturesSection.tsx)
-(`public`, `bolt`, `build`, `agriculture`, `pets`, `terminal`).
+(`public`, `bolt`, `build`, `agriculture`, `pets`, `terminal`); any other key renders the
+`public` (globe) icon.
 
 ## Screenshots & art
 
