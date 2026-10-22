@@ -101,8 +101,8 @@ Reporting is off unless a key is set, and any of these turns it off:
   [consoledonottrack.com](https://consoledonottrack.com))
 - leaving `USAGE_REPORTING_KEY` unset
 
-`USAGE_REPORTING_ENDPOINT` sends the reports to a different trace server. On its first page
-request the server logs one line saying whether reporting is on and, if it is off, which switch
+`USAGE_REPORTING_ENDPOINT` sends the reports to a different trace server. On the first request
+its middleware sees (any path outside `/_next/` and `/api/` without a file extension), the server logs one line saying whether reporting is on and, if it is off, which switch
 turned it off. The only case with no line is a missing key with none of the other switches set,
 so a site that was never configured stays quiet. Details: https://github.com/Stephenson-Software/trace#usage-reporting
 
