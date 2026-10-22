@@ -28,6 +28,10 @@ color-mode toggle, chrome, and Docker/CI setup.
   in-game screenshots, and a "how to play" panel (desktop, terminal/text mode, and in the browser).
 - **Download** (`/download`) — platform cards linking to the latest GitHub release assets
   (Windows installer + portable zip, macOS `.dmg`, and run-from-source for Linux).
+- **`/version.json`** — `{"version": "<version>"}`, the `package.json` version this build was made
+  from, sent with `Cache-Control: no-store` so a deploy can be checked by the version it reports.
+- **`/sitemap.xml`** — every indexable page (`SITEMAP_PATHS` in [`utils/site.ts`](utils/site.ts)) at
+  the production origin; `public/robots.txt` points crawlers at it.
 
 The game's own art (icon, sprites, screenshots) lives in `public/` and is shown on the site.
 
@@ -97,9 +101,10 @@ Reporting is off unless a key is set, and any of these turns it off:
   [consoledonottrack.com](https://consoledonottrack.com))
 - leaving `USAGE_REPORTING_KEY` unset
 
-`USAGE_REPORTING_ENDPOINT` sends the reports to a different trace server. With a key set, the
-server logs one line on its first request saying whether reporting is on and, if it is off, which
-switch turned it off. Details: https://github.com/Stephenson-Software/trace#usage-reporting
+`USAGE_REPORTING_ENDPOINT` sends the reports to a different trace server. On the first request
+its middleware sees (any path outside `/_next/` and `/api/` without a file extension), the server logs one line saying whether reporting is on and, if it is off, which switch
+turned it off. The only case with no line is a missing key with none of the other switches set,
+so a site that was never configured stays quiet. Details: https://github.com/Stephenson-Software/trace#usage-reporting
 
 ## License
 

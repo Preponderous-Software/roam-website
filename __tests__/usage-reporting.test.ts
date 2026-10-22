@@ -101,6 +101,11 @@ describe('startupLine', () => {
     it('is silent when there is no key', () => {
         expect(startupLine({})).toBeNull();
     });
+
+    it('still names an opt-out switch when there is no key', () => {
+        expect(startupLine({ DO_NOT_TRACK: '1' })).toBe('Usage reporting is off (environment).');
+        expect(startupLine({ USAGE_REPORTING_ENABLED: 'off' })).toBe('Usage reporting is off (USAGE_REPORTING_ENABLED).');
+    });
 });
 
 describe('createUsageReporting', () => {
