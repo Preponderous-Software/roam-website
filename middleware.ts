@@ -1,7 +1,8 @@
 // Reports one `page-view` event to trace per HTML page served, server-side, so
 // no page component has to know about it and no script reaches the browser.
-// Only the path and the site version are sent -- no query string, IP address,
-// user agent, cookie, referrer or identity (trace decision 0002). The rules are
+// Only the path, the site version and this server's random installation ID are
+// sent -- no query string, IP address, user agent, cookie, referrer or anything
+// else about the visitor (trace decision 0002). The rules are
 // in utils/page-view-policy.ts; the client and its switches in
 // utils/usage-reporting.ts.
 import { NextResponse } from 'next/server';
