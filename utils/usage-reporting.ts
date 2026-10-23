@@ -130,7 +130,7 @@ export function createUsageReporting(
     });
 }
 
-/** The tags a page view is reported with: the normalised path, nothing else (the client adds `version`). */
+/** The tags a page view is reported with: the normalised path, nothing else (the client adds `version` and `install`). */
 export function pageViewTags(page: string): Record<string, string> {
     return { page };
 }
