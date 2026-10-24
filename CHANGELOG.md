@@ -9,6 +9,7 @@ All notable changes to the Roam website are documented here.
 - `README.md` and `CONFIG.md` said only `USAGE_REPORTING_ENABLED=false` turns usage reporting off, but `utils/usage-reporting.ts` also accepts `0`, `no` and `off`, case-insensitively and with surrounding space ignored. Both now list every accepted value.
 - `README.md` said the usage-reporting status line is logged "with a key set", but `startupLine()` in `utils/usage-reporting.ts` also logs it without a key whenever an opt-out switch is set; it is skipped only when the missing key is the reason reporting is off. The README and the function's comment now say so.
 - `README.md`'s "What's on it" now lists `/version.json` and `/sitemap.xml`, and `CONFIG.md` says that an unknown feature-card `icon` key renders the `public` icon.
+- `README.md`'s "What's on it" described the download page as platform cards only, but `pages/download.tsx` also renders an "Or play in browser" link to `/play` and the "How to play" panel. The entry now lists all three.
 
 ## [0.3.2] - 2026-10-20
 
