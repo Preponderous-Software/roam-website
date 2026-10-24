@@ -26,8 +26,9 @@ color-mode toggle, chrome, and Docker/CI setup.
 
 - **Home** (`/`) — hero (with a "Play in browser" link to `/play`), an at-a-glance feature grid,
   in-game screenshots, and a "how to play" panel (desktop, terminal/text mode, and in the browser).
-- **Download** (`/download`) — platform cards linking to the latest GitHub release assets
-  (Windows installer + portable zip, macOS `.dmg`, and run-from-source for Linux).
+- **Download** (`/download`) — an "Or play in browser" link to `/play`, platform cards linking to
+  the latest GitHub release assets (Windows installer + portable zip, macOS `.dmg`, and
+  run-from-source for Linux), and the same "how to play" panel as the home page.
 - **`/version.json`** — `{"version": "<version>"}`, the `package.json` version this build was made
   from, sent with `Cache-Control: no-store` so a deploy can be checked by the version it reports.
 - **`/sitemap.xml`** — every indexable page (`SITEMAP_PATHS` in [`utils/site.ts`](utils/site.ts)) at
