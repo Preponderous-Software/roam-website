@@ -7,14 +7,16 @@ import {PLAY_3D_URL} from '../utils/site';
 // One Roam world shown twice, side by side: drawn by the game's own 2D room
 // renderer, and exported by roam-usd and rendered in 3D by Strata. Both are
 // pre-rendered files (scripts/hero/); nothing here runs the game or loads a 3D
-// engine. The 3D side starts as a still and becomes a day-and-night loop only
-// once the page has loaded, the box is on screen, and the visitor has not asked
-// for reduced motion or reduced data. A loop that never ends can be paused
-// (WCAG 2.2.2).
+// engine. The 3D side starts as a still and becomes a day-and-night loop (a
+// short muted video, VP9 WebM or H.264 MP4) only once the page has loaded, the
+// box is on screen, and the visitor has not asked for reduced motion or reduced
+// data; the video element is not in the page until then, so it never autoplays
+// for them. A loop that never ends can be paused (WCAG 2.2.2).
 
 export const HERO_2D = '/hero/roam-2d.png';
 export const HERO_3D_POSTER = '/hero/roam-3d.jpg';
-export const HERO_3D_LOOP = '/hero/roam-3d.gif';
+export const HERO_3D_LOOP_WEBM = '/hero/roam-3d.webm';
+export const HERO_3D_LOOP_MP4 = '/hero/roam-3d.mp4';
 export const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
 const prefersStill = (): boolean => {
@@ -42,6 +44,20 @@ const WorldDiptych: React.FC = () => {
     const box = React.useRef<HTMLDivElement>(null);
     const [canPlay, setCanPlay] = React.useState(false); // the still until the browser says otherwise
     const [paused, setPaused] = React.useState(false);
+    const video = React.useRef<HTMLVideoElement | null>(null);
+
+    // Pausing holds the current frame; playing resumes it. play() rejects if the
+    // browser refuses autoplay, and the poster (the still) then stays on show.
+    React.useEffect(() => {
+        const element = video.current;
+        if (!element) return;
+        try {
+            if (paused) element.pause();
+            else void element.play()?.catch?.(() => undefined);
+        } catch {
+            // A browser without media playback keeps the poster.
+        }
+    }, [paused, canPlay]);
 
     React.useEffect(() => {
         if (prefersStill()) return undefined;
@@ -78,8 +94,7 @@ const WorldDiptych: React.FC = () => {
         };
     }, []);
 
-    const playing = canPlay && !paused;
-
+    
     return (
         <Box
             ref={box}
@@ -113,19 +128,30 @@ const WorldDiptych: React.FC = () => {
                             data-testid="world-diptych-3d"
                             // Hidden under the loop, so its noon edge does not show
                             // round the loop's evening.
-                            style={{...frame, opacity: playing ? 0 : 1}}
+                            style={{...frame, opacity: canPlay ? 0 : 1}}
                         />
-                        {playing ? (
+                        {canPlay ? (
                             // Laid over the still, a pixel inside its edge, rather than
-                            // swapped into it: a later image is a new "largest contentful
-                            // paint" only when it is larger, so the loop never is.
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                                src={HERO_3D_LOOP}
-                                width={420}
-                                height={420}
-                                alt=""
+                            // swapped into it: a later paint is a new "largest contentful
+                            // paint" only when it is larger, so the loop never is. Its
+                            // poster is the same still, so nothing changes until it plays.
+                            <video
+                                ref={(element) => {
+                                    video.current = element;
+                                    // React sets muted as a property only; autoplay needs it
+                                    // before the first play.
+                                    if (element) element.muted = true;
+                                }}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                preload="metadata"
+                                poster={HERO_3D_POSTER}
+                                width={640}
+                                height={640}
                                 aria-hidden
+                                tabIndex={-1}
                                 data-testid="world-diptych-3d-loop"
                                 style={{
                                     ...frame,
@@ -135,8 +161,12 @@ const WorldDiptych: React.FC = () => {
                                     width: 'calc(100% - 2px)',
                                     height: 'calc(100% - 2px)',
                                     borderRadius: 15,
+                                    objectFit: 'cover',
                                 }}
-                            />
+                            >
+                                <source src={HERO_3D_LOOP_WEBM} type="video/webm"/>
+                                <source src={HERO_3D_LOOP_MP4} type="video/mp4"/>
+                            </video>
                         ) : null}
                         {canPlay ? (
                             <IconButton

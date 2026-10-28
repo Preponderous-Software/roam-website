@@ -76,7 +76,8 @@ Images live in `public/`:
 
 - `roam-icon.png` — the game icon (logo + favicon)
 - `screenshots/*.png` — gameplay/minimap shots shown in the showcase
-- `hero/roam-2d.png`, `hero/roam-3d.jpg`, `hero/roam-3d.gif` — one world in 2D and in 3D, shown
+- `hero/roam-2d.png`, `hero/roam-3d.jpg`, `hero/roam-3d.webm`, `hero/roam-3d.mp4` — one world in 2D
+  and in 3D (a still, then a short muted loop as VP9 WebM or H.264 MP4), shown
   under the hero's buttons by [`components/WorldDiptych.tsx`](components/WorldDiptych.tsx); made
   by [`scripts/hero/`](scripts/hero/README.md)
 - `og-roam-2d-3d.png` — the 1200×630 share image (`og:image`/`twitter:image`, with its type, size
