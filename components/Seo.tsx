@@ -9,18 +9,21 @@ import {absoluteUrl} from '../utils/site';
 const SITE_NAME = 'Roam';
 const DEFAULT_DESCRIPTION =
     'Explore a procedurally-generated 2D world and interact with your surroundings. A free, source-available survival game by Preponderous Software.';
-// The share card: public/og-image.png, a 1200x630 PNG drawn from
-// og-card/card.json (a blocky island rendered with Strata, the title over it;
-// see og-card/README.md). 1200x630 is the 1.91:1 shape summary_large_image
-// expects. OG_IMAGE_ALT is the card spec's alt text, word for word;
-// __tests__/Seo.test.tsx fails if the two drift apart.
-export const OG_IMAGE_PATH = '/og-image.png';
+// The share card: public/og-roam-2d-3d.png, a 1200x630 PNG cut from the home
+// page's 2D / 3D diptych (one Roam world drawn by Roam's own 2D renderer beside
+// the same world rendered in 3D with Strata, the title in a band below). It is
+// made by scripts/hero/render_hero.py --card; see scripts/hero/README.md.
+// 1200x630 is the 1.91:1 shape summary_large_image expects. OG_IMAGE_ALT is
+// scripts/hero/og-card.json's alt text, word for word; __tests__/Seo.test.tsx
+// fails if the two drift apart.
+export const OG_IMAGE_PATH = '/og-roam-2d-3d.png';
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 export const OG_IMAGE_ALT =
-    'A blocky island of grass, sand, rock and water with pine trees and a small cottage, rendered in 3D ' +
-    'with Strata. Over it: the title Roam, the tagline “Explore a procedurally generated world”, and the ' +
-    'address roam.preponderous.org.';
+    'The same Roam world twice, side by side: on the left in 2D, top-down pixel art of forest, meadow ' +
+    'and a small fenced home as the game draws it; on the right in 3D, the same forest, meadow and ' +
+    'home as blocks. Below them: the title Roam, the tagline “One world, in 2D and 3D”, the address ' +
+    'roam.preponderous.org, and “3D rendered with Strata 0.6.0”.';
 const OG_IMAGE = absoluteUrl(OG_IMAGE_PATH);
 
 interface SeoProps {

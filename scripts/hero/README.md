@@ -6,6 +6,7 @@ comes from Preponderous projects:
 | File | What it is | Made with |
 | --- | --- | --- |
 | `hero/roam-2d.png` | The world from above, 408 × 408 (8 px a tile) | [Roam](https://github.com/Preponderous-Software/roam)'s own `RoomJsonReaderWriter` and `Room.drawWithOffset` through its `PygameRenderer` (SDL dummy driver), no HUD or player |
+| `og-roam-2d-3d.png` (with `--card`) | The link-preview card, 1200 × 630: the 2D world at 13 px a tile (cropped, never resampled) beside the 3D noon frame (scaled to 600 wide and cropped so the home is mid-panel), over a title band. `og-card.json` beside this script records its alt text and SHA-256 | The two renders above, laid out with Pillow and DejaVu Sans |
 | `hero/roam-3d.jpg`, `hero/roam-3d.gif` | The same world in 3D at noon (640 × 640), and one day as a 36-frame loop (420 × 420) | [roam-usd](https://github.com/Preponderous-Software/roam-usd)'s USD export, read with `usd-core` and rendered headless by [Strata](https://github.com/Preponderous-Software/strata) 0.6.0 through its Python binding (the release library, SHA-256 checked) |
 
 The world is roam-usd's seed 6, radius 1 (3 × 3 rooms), no caves, generated with Roam's own
@@ -28,8 +29,15 @@ export SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy
 export LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe   # without a GPU
 roam-usd generate --roam roam --seed 6 --radius 1 --cave-depth 0 --keep-saves -o out/
 python scripts/hero/render_hero.py --roam roam --stage out/seed_6.usda --save out/seed_6_save \
-  -o out/hero --public public
+  -o out/hero --public public --card
 ```
 
-Two runs on the same inputs wrote byte-identical files. About 25 s on a 20-thread machine with
+Two runs on the same inputs wrote byte-identical files, and adding `--card` leaves the hero files
+unchanged. The card's text uses DejaVu Sans from `/usr/share/fonts/truetype/dejavu/`
+(`fonts-dejavu-core` on Debian and Ubuntu). If the card's picture or text changes, rewrite
+`CARD_ALT` in the script, re-run it, and copy the new alt text into `OG_IMAGE_ALT` in
+`components/Seo.tsx`; `__tests__/Seo.test.tsx` fails until they match. Scrapers cache a card by its
+URL for days, so a materially new card is best given a new file name.
+
+A run takes about 25 s on a 20-thread machine with
 Mesa llvmpipe.

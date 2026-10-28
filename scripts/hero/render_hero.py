@@ -236,6 +236,89 @@ def publish(out: Path, public: Path) -> None:
     q[0].save(public / "hero" / "roam-3d.gif", save_all=True, append_images=q[1:], duration=166, loop=0, optimize=True)
 
 
+# ----------------------------------------------------------------------- card
+
+CARD_W, CARD_H = 1200, 630
+CARD_PANEL = 470  # height of the two picture halves; the title band takes the rest
+CARD_CELL = 13  # 2D pixels per tile on the card: 46 x 36 of the world's 51 x 51 tiles show
+CARD_3D_TOP = 70  # rows cut off the top of the 600 x 600 noon frame, to centre the home
+CARD_FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+CARD_FONT_BOOK = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+CARD_ALT = (
+    "The same Roam world twice, side by side: on the left in 2D, top-down pixel art of forest, "
+    "meadow and a small fenced home as the game draws it; on the right in 3D, the same forest, "
+    "meadow and home as blocks. Below them: the title Roam, the tagline \u201cOne world, in 2D "
+    "and 3D\u201d, the address roam.preponderous.org, and \u201c3D rendered with Strata 0.6.0\u201d."
+)
+
+
+def _chip(draw, xy, text, font, anchor_right=False):
+    """A small rounded label on a dark, translucent plate."""
+    x, y = xy
+    l, t, r, b = draw.textbbox((0, 0), text, font=font)
+    pad_x, pad_y = 12, 7
+    w, h = r - l + 2 * pad_x, b - t + 2 * pad_y
+    if anchor_right:
+        x -= w
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=8, fill=(12, 16, 14, 205))
+    draw.text((x + pad_x - l, y + pad_y - t), text, font=font, fill=(240, 244, 240, 255))
+
+
+def make_card(out: Path, public: Path) -> Path:
+    """The link-preview card: the diptych cut to 1200 x 630.
+
+    Two 600 x ``CARD_PANEL`` halves over a title band. Left, Roam's own 2D render at
+    ``CARD_CELL`` pixels a tile (``2d-card.png``), cropped around the world's centre and
+    never resampled, so the pixel art stays crisp. Right, the hero's noon Strata frame
+    scaled to 600 wide and cropped so the home sits mid-panel, as it does on the left.
+    Chips name each half, and the band credits Strata.
+    """
+    import hashlib
+
+    from PIL import Image, ImageDraw, ImageFont
+
+    half = CARD_W // 2
+    flat = Image.open(out / "2d-card.png").convert("RGB")
+    fx, fy = (flat.width - half) // 2, (flat.height - CARD_PANEL) // 2
+    left = flat.crop((fx, fy, fx + half, fy + CARD_PANEL))
+    frames = sorted(out.glob("3d-*.png"))
+    noon = Image.open(frames[len(frames) // 4]).convert("RGB").resize((half, half), Image.LANCZOS)
+    right = noon.crop((0, CARD_3D_TOP, half, CARD_3D_TOP + CARD_PANEL))
+
+    card = Image.new("RGBA", (CARD_W, CARD_H), (15, 21, 18, 255))
+    card.paste(left, (0, 0))
+    card.paste(right, (half, 0))
+    d = ImageDraw.Draw(card)
+    d.rectangle((half - 2, 0, half + 1, CARD_PANEL), fill=(15, 21, 18, 255))  # the seam
+    d.rectangle((0, CARD_PANEL, CARD_W, CARD_PANEL + 3), fill=(59, 154, 90, 255))  # Roam green rule
+
+    chip = ImageFont.truetype(CARD_FONT, 22)
+    _chip(d, (20, 20), "2D", chip)
+    _chip(d, (half + 20, 20), "3D", chip)
+    mid = CARD_PANEL + (CARD_H - CARD_PANEL) // 2 + 2
+    title = ImageFont.truetype(CARD_FONT, 84)
+    d.text((48, mid), "Roam", font=title, fill=(255, 255, 255, 255), anchor="lm")
+    tx = 48 + d.textlength("Roam", font=title) + 40
+    d.text((tx, mid - 6), "One world, in 2D and 3D", font=ImageFont.truetype(CARD_FONT_BOOK, 32), fill=(226, 232, 226, 255), anchor="ls")
+    d.text((tx, mid + 8), "roam.preponderous.org", font=ImageFont.truetype(CARD_FONT, 26), fill=(130, 214, 150, 255), anchor="lt")
+    credit = ImageFont.truetype(CARD_FONT_BOOK, 21)
+    d.text((CARD_W - 48, mid - 6), "3D rendered with", font=credit, fill=(170, 180, 172, 255), anchor="rs")
+    d.text((CARD_W - 48, mid + 8), f"Strata {STRATA_VERSION}", font=ImageFont.truetype(CARD_FONT, 26), fill=(240, 244, 240, 255), anchor="rt")
+
+    dest = public / "og-roam-2d-3d.png"
+    card.convert("RGB").save(dest, optimize=True)
+    spec = {
+        "comment": "The link-preview card; made by scripts/hero/render_hero.py --card. Components/Seo.tsx's OG_IMAGE_ALT must equal alt.",
+        "png": "public/og-roam-2d-3d.png",
+        "width": CARD_W,
+        "height": CARD_H,
+        "alt": CARD_ALT,
+        "sha256": hashlib.sha256(dest.read_bytes()).hexdigest(),
+    }
+    (Path(__file__).resolve().parent / "og-card.json").write_text(json.dumps(spec, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return dest
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--roam", required=True, type=Path, help="a Roam checkout (sprites and room code)")
@@ -246,12 +329,19 @@ def main(argv=None) -> int:
     ap.add_argument("--size", nargs=2, type=int, default=[816, 816], help="3D frame size")
     ap.add_argument("--frames", type=int, default=72)
     ap.add_argument("--public", type=Path, help="also write the site's files into this public/ directory")
+    ap.add_argument("--card", action="store_true", help="also write the 1200 x 630 link-preview card (needs --public)")
     args = ap.parse_args(argv)
+    if args.card and not args.public:
+        ap.error("--card needs --public")
     render_2d(args.roam.resolve(), args.save.resolve(), args.out / "2d.png", args.cell)
+    if args.card:
+        render_2d(args.roam.resolve(), args.save.resolve(), args.out / "2d-card.png", CARD_CELL)
     stats = render_3d(args.roam.resolve(), args.stage, args.out, args.size, args.frames)
     stats["manifest"] = json.loads((args.save / "roam-usd-manifest.json").read_text(encoding="utf-8"))
     if args.public:
         publish(args.out, args.public)
+    if args.card:
+        make_card(args.out, args.public)
     (args.out / "stats.json").write_text(json.dumps(stats, indent=1) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in stats.items() if k != "manifest"}))
     return 0
