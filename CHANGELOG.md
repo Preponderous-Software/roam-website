@@ -4,6 +4,10 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- The share image is now `public/og-image.png`, a 1200×630 card of a blocky island rendered in 3D with [Strata](https://github.com/Preponderous-Software/strata), with the title over it. It replaces the 600×600 `screenshots/house.png`, which `summary_large_image` cropped. `components/Seo.tsx` also emits `og:image:type`, `og:image:width`, `og:image:height`, `og:image:alt` and `twitter:image:alt`. The card is drawn from `og-card/card.json` by community-site-kit's `tools/og-card` and is pre-rendered, so nothing 3D runs on the site.
+
 ### Fixed
 
 - `README.md` and `CONFIG.md` said only `USAGE_REPORTING_ENABLED=false` turns usage reporting off, but `utils/usage-reporting.ts` also accepts `0`, `no` and `off`, case-insensitively and with surrounding space ignored. Both now list every accepted value.
