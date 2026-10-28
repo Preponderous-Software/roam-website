@@ -1,7 +1,9 @@
 import {describe, expect, it, vi} from 'vitest';
 import {render} from '@testing-library/react';
 import React from 'react';
-import Seo from '../components/Seo';
+import {readFileSync} from 'fs';
+import {join} from 'path';
+import Seo, {OG_IMAGE_ALT, OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH} from '../components/Seo';
 
 // next/head only wires up to the real document via the HeadManagerContext that
 // Next's app runtime provides (_app/_document); rendered standalone in jsdom it
@@ -60,8 +62,30 @@ describe('Seo', () => {
 
     it('uses an absolute production URL for the share image', () => {
         const {container} = render(<Seo/>);
-        const image = 'https://roam.preponderous.org/screenshots/house.png';
+        const image = 'https://roam.preponderous.org/og-image.png';
         expect(container.querySelector('meta[property="og:image"]')).toHaveAttribute('content', image);
         expect(container.querySelector('meta[name="twitter:image"]')).toHaveAttribute('content', image);
+    });
+
+    it('declares the share image\'s type, size and alt text', () => {
+        const {container} = render(<Seo/>);
+        expect(container.querySelector('meta[property="og:image:type"]')).toHaveAttribute('content', 'image/png');
+        expect(container.querySelector('meta[property="og:image:width"]')).toHaveAttribute('content', '1200');
+        expect(container.querySelector('meta[property="og:image:height"]')).toHaveAttribute('content', '630');
+        expect(container.querySelector('meta[property="og:image:alt"]')).toHaveAttribute('content', OG_IMAGE_ALT);
+        expect(container.querySelector('meta[name="twitter:image:alt"]')).toHaveAttribute('content', OG_IMAGE_ALT);
+    });
+
+    it('points at a real 1.91:1 PNG of the declared size, whose alt text is its card spec\'s', () => {
+        const root = join(__dirname, '..');
+        const bytes = readFileSync(join(root, 'public', OG_IMAGE_PATH));
+        expect(bytes.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
+        expect({width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20)}).toEqual({
+            width: OG_IMAGE_WIDTH,
+            height: OG_IMAGE_HEIGHT
+        });
+        const spec = JSON.parse(readFileSync(join(root, 'og-card', 'card.json'), 'utf8'));
+        expect(spec.output).toBe(`../public${OG_IMAGE_PATH}`);
+        expect(OG_IMAGE_ALT).toBe(spec.alt);
     });
 });

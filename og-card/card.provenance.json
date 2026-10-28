@@ -1,0 +1,45 @@
+{
+  "tool": "community-site-kit tools/og-card/og_card.py",
+  "tool_repository": "https://github.com/kingdom-community/community-site-kit",
+  "tool_commit": "0a22904074f8f633ff1495eadae1625d271da140",
+  "command": "python3 tools/og-card/og_card.py <site>/og-card/card.json",
+  "renderer": {
+    "engine": "Strata",
+    "version": "0.6.0",
+    "asset": "libstrata-0.6.0-linux-x64.so",
+    "asset_sha256": "3815068f90afa67b42177359a7ea918a5de321d7f7bad8706fa5275c4906af2a",
+    "library_sha256": "3815068f90afa67b42177359a7ea918a5de321d7f7bad8706fa5275c4906af2a",
+    "binding": "strata-engine 0.6.0",
+    "gpu": "llvmpipe (LLVM 12.0.0, 256 bits) | 4.5 (Core Profile) Mesa 21.2.6"
+  },
+  "text": {
+    "pillow": "10.4.0",
+    "fonts": {
+      "DejaVuSans-Bold.ttf": "aa2ebed70cf6a389400a49feeb976c785de411f387d0cff998472590760cc2b6",
+      "DejaVuSans.ttf": "437a5ecec2ec177cba9284cbffc56055311347f3e9fe4f2b4b40323d0290a6db"
+    }
+  },
+  "python": "3.11.15",
+  "spec": {
+    "accent": "#3b9a5a",
+    "alt": "A blocky island of grass, sand, rock and water with pine trees and a small cottage, rendered in 3D with Strata. Over it: the title Roam, the tagline \u201cExplore a procedurally generated world\u201d, and the address roam.preponderous.org.",
+    "credit": "Rendered with Strata",
+    "output": "../public/og-image.png",
+    "scene": "terrain",
+    "seed": 3,
+    "subtitle": "Explore a procedurally generated world",
+    "sun": {
+      "azimuth": 80.0,
+      "elevation": 40.0
+    },
+    "title": "Roam",
+    "url": "roam.preponderous.org",
+    "wordmark": "A game by Preponderous Software"
+  },
+  "output": {
+    "path": "../public/og-image.png",
+    "width": 1200,
+    "height": 630,
+    "sha256": "8eb9889135c6a59ed80a408163b60378d1a6a87783977ed2ed38ca7c206116f2"
+  }
+}

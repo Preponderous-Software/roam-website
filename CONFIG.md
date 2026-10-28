@@ -73,9 +73,11 @@ Each entry has `id`, `icon`, `title`, and `description`. `icon` is one of the ke
 Images live in `public/`:
 
 - `roam-icon.png` — the game icon (logo + favicon)
-- `screenshots/*.png` — gameplay/minimap shots shown in the showcase; `screenshots/house.png`
-  is also the share image (`og:image`/`twitter:image`) set by
-  [`components/Seo.tsx`](components/Seo.tsx)
+- `screenshots/*.png` — gameplay/minimap shots shown in the showcase
+- `og-image.png` — the 1200×630 share image (`og:image`/`twitter:image`, with its type, size and
+  alt text) set by [`components/Seo.tsx`](components/Seo.tsx): a blocky island rendered in 3D with
+  [Strata](https://github.com/Preponderous-Software/strata), with the title over it. It is drawn
+  from `og-card/card.json`; [`og-card/README.md`](og-card/README.md) says how to redraw it
 - `sprites/*.png` — the game's 32×32 sprites used in the hero strip
 - `colormode/{light,dark}.svg` — the sun/moon glyphs painted onto the color-mode toggle
   thumb by [`components/ColorModeToggleSwitch.tsx`](components/ColorModeToggleSwitch.tsx),
