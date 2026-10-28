@@ -4,6 +4,10 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- The share image is now `public/og-roam-2d-3d.png`, a 1200×630 card cut from the home page's 2D / 3D diptych: the same Roam world drawn by Roam's own 2D renderer beside its 3D render by [Strata](https://github.com/Preponderous-Software/strata) 0.6.0, with the title, tagline, address and a Strata credit in a band below. It replaces the seeded-island card (`public/og-image.png` and `og-card/`), which showed no Roam world. It is made by `scripts/hero/render_hero.py --card` in the same run as the hero, and `scripts/hero/og-card.json` records its alt text and SHA-256, which `__tests__/Seo.test.tsx` checks. It has a new file name, so scrapers that cached the old card fetch the new one.
+
 ### Fixed
 
 - `CONFIG.md`'s "Off-site links" section named every URL constant in `utils/site.ts` and where it is shown except `PLAY_3D_URL` (`/play?view=3d`), which `components/WorldDiptych.tsx` links to. It now names it too.

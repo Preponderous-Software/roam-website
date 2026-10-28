@@ -79,10 +79,11 @@ Images live in `public/`:
 - `hero/roam-2d.png`, `hero/roam-3d.jpg`, `hero/roam-3d.gif` — one world in 2D and in 3D, shown
   under the hero's buttons by [`components/WorldDiptych.tsx`](components/WorldDiptych.tsx); made
   by [`scripts/hero/`](scripts/hero/README.md)
-- `og-image.png` — the 1200×630 share image (`og:image`/`twitter:image`, with its type, size and
-  alt text) set by [`components/Seo.tsx`](components/Seo.tsx): a blocky island rendered in 3D with
-  [Strata](https://github.com/Preponderous-Software/strata), with the title over it. It is drawn
-  from `og-card/card.json`; [`og-card/README.md`](og-card/README.md) says how to redraw it
+- `og-roam-2d-3d.png` — the 1200×630 share image (`og:image`/`twitter:image`, with its type, size
+  and alt text) set by [`components/Seo.tsx`](components/Seo.tsx): the hero's 2D / 3D pair cut to
+  a card, the 3D half rendered with [Strata](https://github.com/Preponderous-Software/strata), and
+  the title in a band below. It is made by `scripts/hero/render_hero.py --card`
+  ([`scripts/hero/README.md`](scripts/hero/README.md)); its alt text is in `scripts/hero/og-card.json`
 - `sprites/*.png` — the game's 32×32 sprites used in the hero strip
 - `colormode/{light,dark}.svg` — the sun/moon glyphs painted onto the color-mode toggle
   thumb by [`components/ColorModeToggleSwitch.tsx`](components/ColorModeToggleSwitch.tsx),

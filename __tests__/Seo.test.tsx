@@ -1,6 +1,7 @@
 import {describe, expect, it, vi} from 'vitest';
 import {render} from '@testing-library/react';
 import React from 'react';
+import {createHash} from 'crypto';
 import {readFileSync} from 'fs';
 import {join} from 'path';
 import Seo, {OG_IMAGE_ALT, OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH} from '../components/Seo';
@@ -62,7 +63,7 @@ describe('Seo', () => {
 
     it('uses an absolute production URL for the share image', () => {
         const {container} = render(<Seo/>);
-        const image = 'https://roam.preponderous.org/og-image.png';
+        const image = 'https://roam.preponderous.org/og-roam-2d-3d.png';
         expect(container.querySelector('meta[property="og:image"]')).toHaveAttribute('content', image);
         expect(container.querySelector('meta[name="twitter:image"]')).toHaveAttribute('content', image);
     });
@@ -84,8 +85,11 @@ describe('Seo', () => {
             width: OG_IMAGE_WIDTH,
             height: OG_IMAGE_HEIGHT
         });
-        const spec = JSON.parse(readFileSync(join(root, 'og-card', 'card.json'), 'utf8'));
-        expect(spec.output).toBe(`../public${OG_IMAGE_PATH}`);
+        const spec = JSON.parse(readFileSync(join(root, 'scripts', 'hero', 'og-card.json'), 'utf8'));
+        expect(spec.png).toBe(`public${OG_IMAGE_PATH}`);
+        expect({width: spec.width, height: spec.height}).toEqual({width: OG_IMAGE_WIDTH, height: OG_IMAGE_HEIGHT});
         expect(OG_IMAGE_ALT).toBe(spec.alt);
+        // The committed PNG is the one render_hero.py --card last wrote.
+        expect(createHash('sha256').update(bytes).digest('hex')).toBe(spec.sha256);
     });
 });

@@ -1,0 +1,8 @@
+{
+  "comment": "The link-preview card; made by scripts/hero/render_hero.py --card. Components/Seo.tsx's OG_IMAGE_ALT must equal alt.",
+  "png": "public/og-roam-2d-3d.png",
+  "width": 1200,
+  "height": 630,
+  "alt": "The same Roam world twice, side by side: on the left in 2D, top-down pixel art of forest, meadow and a small fenced home as the game draws it; on the right in 3D, the same forest, meadow and home as blocks. Below them: the title Roam, the tagline “One world, in 2D and 3D”, the address roam.preponderous.org, and “3D rendered with Strata 0.6.0”.",
+  "sha256": "81b4990832a7d7d235f4775369ab828d44945cc15bad1c8b6c8074ad02557766"
+}
