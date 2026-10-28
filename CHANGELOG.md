@@ -4,6 +4,12 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+### Fixed
+
+- `CONFIG.md`'s "Off-site links" section named every URL constant in `utils/site.ts` and where it is shown except `PLAY_3D_URL` (`/play?view=3d`), which `components/WorldDiptych.tsx` links to. It now names it too.
+
+## [0.3.4] - 2026-10-28
+
 ### Added
 
 - The home page's hero shows one Roam world side by side in 2D and in 3D, under the buttons (`components/WorldDiptych.tsx`). The 2D half is drawn by Roam's own room renderer; the 3D half is roam-usd's export of the same world rendered by Strata 0.6.0, with a link to the in-browser 3D view at `/play?view=3d`. Both are pre-rendered files in `public/hero/`, made by `scripts/hero/render_hero.py`. The 3D half is a still until the page has loaded and it is on screen, then a day-and-night loop that can be paused; visitors who prefer reduced motion or save data keep the still.
@@ -11,6 +17,8 @@ All notable changes to the Roam website are documented here.
 ### Changed
 
 - The share image is now `public/og-image.png`, a 1200×630 card of a blocky island rendered in 3D with [Strata](https://github.com/Preponderous-Software/strata), with the title over it. It replaces the 600×600 `screenshots/house.png`, which `summary_large_image` cropped. `components/Seo.tsx` also emits `og:image:type`, `og:image:width`, `og:image:height`, `og:image:alt` and `twitter:image:alt`. The card is drawn from `og-card/card.json` by community-site-kit's `tools/og-card` and is pre-rendered, so nothing 3D runs on the site.
+
+## [0.3.3] - 2026-10-25
 
 ### Fixed
 
