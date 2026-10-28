@@ -6,6 +6,7 @@ All notable changes to the Roam website are documented here.
 
 ### Changed
 
+- The home page hero's 3D day-and-night loop is now a short muted video, `public/hero/roam-3d.webm` (VP9, 253 KB) with `public/hero/roam-3d.mp4` (H.264, 238 KB) as the fallback, in place of the 1.03 MB `roam-3d.gif`, which is removed. It is encoded from the same 36 frames, now at the still's 640 × 640 rather than 420 × 420, by `scripts/hero/render_hero.py`. The rules for when it plays are unchanged: only after the page has loaded and the hero is on screen, never for visitors who prefer reduced motion or save data (they get no video element at all), and with a pause button that now holds the current frame. The still is the video's poster.
 - The share image is now `public/og-roam-2d-3d.png`, a 1200×630 card cut from the home page's 2D / 3D diptych: the same Roam world drawn by Roam's own 2D renderer beside its 3D render by [Strata](https://github.com/Preponderous-Software/strata) 0.6.0, with the title, tagline, address and a Strata credit in a band below. It replaces the seeded-island card (`public/og-image.png` and `og-card/`), which showed no Roam world. It is made by `scripts/hero/render_hero.py --card` in the same run as the hero, and `scripts/hero/og-card.json` records its alt text and SHA-256, which `__tests__/Seo.test.tsx` checks. It has a new file name, so scrapers that cached the old card fetch the new one.
 
 ### Fixed

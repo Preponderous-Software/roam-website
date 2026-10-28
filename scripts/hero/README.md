@@ -7,7 +7,7 @@ comes from Preponderous projects:
 | --- | --- | --- |
 | `hero/roam-2d.png` | The world from above, 408 × 408 (8 px a tile) | [Roam](https://github.com/Preponderous-Software/roam)'s own `RoomJsonReaderWriter` and `Room.drawWithOffset` through its `PygameRenderer` (SDL dummy driver), no HUD or player |
 | `og-roam-2d-3d.png` (with `--card`) | The link-preview card, 1200 × 630: the 2D world at 13 px a tile (cropped, never resampled) beside the 3D noon frame (scaled to 600 wide and cropped so the home is mid-panel), over a title band. `og-card.json` beside this script records its alt text and SHA-256 | The two renders above, laid out with Pillow and DejaVu Sans |
-| `hero/roam-3d.jpg`, `hero/roam-3d.gif` | The same world in 3D at noon (640 × 640), and one day as a 36-frame loop (420 × 420) | [roam-usd](https://github.com/Preponderous-Software/roam-usd)'s USD export, read with `usd-core` and rendered headless by [Strata](https://github.com/Preponderous-Software/strata) 0.6.0 through its Python binding (the release library, SHA-256 checked) |
+| `hero/roam-3d.jpg`, `hero/roam-3d.webm`, `hero/roam-3d.mp4` | The same world in 3D at noon (640 × 640), and one day as a 36-frame, six-second loop (640 × 640, 6 fps) in VP9 WebM and H.264 MP4, encoded by the static ffmpeg 7.0.2 that `imageio-ffmpeg` 0.7.0 ships (or `$FFMPEG`), on one thread with bit-exact flags | [roam-usd](https://github.com/Preponderous-Software/roam-usd)'s USD export, read with `usd-core` and rendered headless by [Strata](https://github.com/Preponderous-Software/strata) 0.6.0 through its Python binding (the release library, SHA-256 checked) |
 
 The world is roam-usd's seed 6, radius 1 (3 × 3 rooms), no caves, generated with Roam's own
 generator at Roam `224c35a` and roam-usd `17fceba` on Python 3.12. roam-usd seeds Python's
@@ -21,7 +21,7 @@ home's torch, dawn); the sky colours are decoration.
 ## Reproducing
 
 ```bash
-pip install usd-core numpy pillow "pygame>=2.6.1" structlog jsonschema \
+pip install usd-core numpy pillow imageio-ffmpeg==0.7.0 "pygame>=2.6.1" structlog jsonschema \
   "git+https://github.com/Preponderous-Software/roam-usd@17fcebaa012a5bfd5d5c5962eb4112f6d6990b93" \
   "strata-engine @ git+https://github.com/Preponderous-Software/strata@v0.6.0#subdirectory=bindings/python"
 git clone https://github.com/Preponderous-Software/roam && git -C roam checkout 224c35a

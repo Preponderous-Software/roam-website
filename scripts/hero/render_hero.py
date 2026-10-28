@@ -20,9 +20,10 @@ Make the world first with roam-usd (https://github.com/Preponderous-Software/roa
 
 Needs Linux x86-64, ``libEGL.so.1`` with a Mesa driver (``LIBGL_ALWAYS_SOFTWARE=1
 GALLIUM_DRIVER=llvmpipe`` without a GPU), Roam's Python requirements (pygame), usd-core,
-NumPy, Pillow and Strata's official Python binding at the v0.6.0 tag::
+NumPy, Pillow, imageio-ffmpeg (for the loop's encoder) and Strata's official Python binding
+at the v0.6.0 tag::
 
-    pip install usd-core numpy pillow "pygame>=2.6.1" structlog jsonschema \\
+    pip install usd-core numpy pillow imageio-ffmpeg==0.7.0 "pygame>=2.6.1" structlog jsonschema \\
       "strata-engine @ git+https://github.com/Preponderous-Software/strata@v0.6.0#subdirectory=bindings/python"
 """
 
@@ -213,27 +214,52 @@ def render_3d(roam: Path, stage: Path, out_dir: Path, size, frames: int) -> dict
     return {"boxes": len(boxes), "cards": len(cards), "torches": len(torches), "gpu": gpu, "strata": STRATA_VERSION}
 
 
+LOOP_SIDE = 640  # the loop matches the still, so nothing softens when playback starts
+LOOP_FPS = 6  # every other frame of the day: 36 frames, a six-second loop
+# The encoder is the static ffmpeg 7.0.2 that imageio-ffmpeg 0.7.0 ships, run on one thread
+# with bit-exact flags so the same frames give the same files.
+LOOP_ENCODES = {
+    "roam-3d.webm": ["-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "38", "-row-mt", "0"],
+    "roam-3d.mp4": ["-c:v", "libx264", "-preset", "veryslow", "-crf", "30", "-profile:v", "high",
+                    "-movflags", "+faststart", "-flags", "+bitexact"],
+}
+
+
+def ffmpeg_exe() -> str:
+    """$FFMPEG if set, else the ffmpeg that imageio-ffmpeg ships."""
+    if os.environ.get("FFMPEG"):
+        return os.environ["FFMPEG"]
+    import imageio_ffmpeg
+
+    return imageio_ffmpeg.get_ffmpeg_exe()
+
+
 def publish(out: Path, public: Path) -> None:
-    """The site's files: the 2D still (exactly half size, crisp), and the 3D still
-    (noon) and loop (every other frame, one shared palette)."""
+    """The site's files: the 2D still (exactly half size, crisp), the 3D still (noon),
+    and the 3D loop (every other frame) as VP9 WebM and H.264 MP4."""
+    import subprocess
+    import tempfile
+
     from PIL import Image
 
     frames = sorted(out.glob("3d-*.png"))
-    side = 420
     (public / "hero").mkdir(parents=True, exist_ok=True)
     flat = Image.open(out / "2d.png").convert("RGB")
     flat.resize((flat.width // 2, flat.height // 2), Image.NEAREST).save(public / "hero" / "roam-2d.png", optimize=True)
     noon = Image.open(frames[len(frames) // 4]).convert("RGB")
-    # The still is larger than the loop: it is the image the page is measured by, and a
-    # browser counts the loop laid over it as no larger, so the loop is never a later LCP.
+    # The still is the video's poster and the image the page is measured by; the video is
+    # laid a pixel inside it, so the browser never counts the loop as a later, larger paint.
     noon.resize((640, 640), Image.LANCZOS).save(public / "hero" / "roam-3d.jpg", quality=80, optimize=True, progressive=True)
-    loop = [Image.open(f).convert("RGB").resize((side, side), Image.LANCZOS) for f in frames[::2]]
-    sheet = Image.new("RGB", (side, side * len(loop[::2])))
-    for k, im in enumerate(loop[::2]):
-        sheet.paste(im, (0, k * side))
-    palette = sheet.quantize(colors=255, method=Image.Quantize.MEDIANCUT)
-    q = [im.quantize(palette=palette, dither=Image.Dither.NONE) for im in loop]
-    q[0].save(public / "hero" / "roam-3d.gif", save_all=True, append_images=q[1:], duration=166, loop=0, optimize=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        for k, f in enumerate(frames[::2]):
+            Image.open(f).convert("RGB").resize((LOOP_SIDE, LOOP_SIDE), Image.LANCZOS).save(Path(tmp) / f"{k:04d}.png")
+        for name, codec in LOOP_ENCODES.items():
+            subprocess.run(
+                [ffmpeg_exe(), "-v", "error", "-y", "-framerate", str(LOOP_FPS), "-i", str(Path(tmp) / "%04d.png"),
+                 *codec, "-threads", "1", "-pix_fmt", "yuv420p", "-an", "-map_metadata", "-1",
+                 "-fflags", "+bitexact", str(public / "hero" / name)],
+                check=True,
+            )
 
 
 # ----------------------------------------------------------------------- card
