@@ -45,7 +45,9 @@ The in-browser build's path, `PLAY_URL` (`/play`), lives there too. That build i
 same host but outside this Next.js app, so it is linked as a plain same-tab path from the home
 hero ([`components/Hero.tsx`](components/Hero.tsx)), the download page
 ([`pages/download.tsx`](pages/download.tsx)), and the "How to play" panel
-([`components/HowToPlay.tsx`](components/HowToPlay.tsx)).
+([`components/HowToPlay.tsx`](components/HowToPlay.tsx)). `PLAY_3D_URL` (`/play?view=3d`) is the
+same build with its 3D view turned on, linked from the caption of the 3D image under the hero
+([`components/WorldDiptych.tsx`](components/WorldDiptych.tsx)).
 
 `SITE_ORIGIN` (`https://roam.preponderous.org`) is the production origin that canonical links,
 `og:url`, the absolute share-image URLs, `/sitemap.xml` and `public/robots.txt` are built from. A
