@@ -66,6 +66,8 @@ describe('public assets', () => {
         expect(paths).toContain('/screenshots/house.png');
         expect(paths).toContain('/screenshots/map.png');
         expect(paths).toContain('/sprites/player_down.png');
+        expect(paths).toContain('/hero/roam-2d.png');
+        expect(paths).toContain('/hero/roam-3d.jpg');
     });
 
     // CSS background images (the color-mode toggle's sun/moon glyphs) are not

@@ -24,7 +24,8 @@ color-mode toggle, chrome, and Docker/CI setup.
 
 ## What's on it
 
-- **Home** (`/`) — hero (with a "Play in browser" link to `/play`), an at-a-glance feature grid,
+- **Home** (`/`) — hero (with a "Play in browser" link to `/play`, and one world shown side by side
+  in 2D and in 3D, linking to the 3D view at `/play?view=3d`), an at-a-glance feature grid,
   in-game screenshots, and a "how to play" panel (desktop, terminal/text mode, and in the browser).
 - **Download** (`/download`) — an "Or play in browser" link to `/play`, platform cards linking to
   the latest GitHub release assets (Windows installer + portable zip, macOS `.dmg`, and

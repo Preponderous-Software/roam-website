@@ -4,10 +4,12 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import React from 'react';
 import SpriteStrip from './SpriteStrip';
+import WorldDiptych from './WorldDiptych';
 import {PLAY_URL, REPO_URL} from '../utils/site';
 
 // Landing hero: the game name, its one-line pitch, the calls to action
-// (play in the browser / download / source), and a strip of the game's own sprites underneath.
+// (play in the browser / download / source), one world shown in 2D and in 3D, and a strip of the
+// game's own sprites underneath.
 const Hero: React.FC = () => (
     <Box sx={{textAlign: 'center', py: {xs: 5, md: 9}}}>
         <Box
@@ -50,6 +52,7 @@ const Hero: React.FC = () => (
                 View Source
             </Button>
         </Stack>
+        <WorldDiptych/>
         <Box sx={{mt: {xs: 5, md: 7}}}>
             <SpriteStrip/>
         </Box>

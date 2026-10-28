@@ -12,6 +12,8 @@ export const DISCORD_URL = 'https://discord.gg/49J4RHQxhy';
 // The in-browser (Pyodide) build of Roam. Served on this same host but outside
 // this Next.js app, so it is linked as a plain same-tab path.
 export const PLAY_URL = '/play';
+// The same build with its opt-in 3D view (Roam's RFC 0017, off by default).
+export const PLAY_3D_URL = `${PLAY_URL}?view=3d`;
 
 // The production origin. Canonical links, og:url, absolute og:image URLs, the
 // sitemap and robots.txt are all built from it. It is a constant rather than a
