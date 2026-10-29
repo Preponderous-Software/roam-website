@@ -50,7 +50,13 @@ afterEach(() => {
     vi.unstubAllGlobals();
     delete (window as {matchMedia?: unknown}).matchMedia;
     delete (navigator as {connection?: unknown}).connection;
+    delete (document as {readyState?: unknown}).readyState;
 });
+
+// A document still loading, as it is when the hero mounts before the load event.
+const stubLoading = () => {
+    Object.defineProperty(document, 'readyState', {configurable: true, get: () => 'loading'});
+};
 
 describe('WorldDiptych', () => {
     it('ships small files: a crisp 2D still, a 3D still and a 3D loop in two codecs', () => {
@@ -125,6 +131,95 @@ describe('WorldDiptych', () => {
         Object.defineProperty(navigator, 'connection', {configurable: true, value: {saveData: true}});
         render(<WorldDiptych/>);
         scrollIntoView();
+        expect(loop()).toBeNull();
+    });
+
+    it('waits for the load event before watching for the box', () => {
+        stubMedia();
+        stubLoading();
+        render(<WorldDiptych/>);
+        expect(observed).toHaveLength(0);
+        act(() => { window.dispatchEvent(new Event('load')); });
+        expect(observed).toHaveLength(1);
+        scrollIntoView();
+        expect(loop()).not.toBeNull();
+    });
+
+    it('stops waiting for the load event once it is gone from the page', () => {
+        stubMedia();
+        stubLoading();
+        const add = vi.spyOn(window, 'addEventListener');
+        const remove = vi.spyOn(window, 'removeEventListener');
+        const {unmount} = render(<WorldDiptych/>);
+        const onLoad = add.mock.calls.find(([type]) => type === 'load')?.[1];
+        expect(onLoad).toBeTypeOf('function');
+        unmount();
+        expect(remove).toHaveBeenCalledWith('load', onLoad);
+    });
+
+    it('keeps the still while the box is off screen', () => {
+        stubMedia();
+        render(<WorldDiptych/>);
+        act(() => observed.forEach((cb) => cb([{isIntersecting: false}])));
+        expect(loop()).toBeNull();
+        expect(screen.queryByRole('button')).toBeNull();
+    });
+
+    describe('when the visitor turns on reduced motion after the page has loaded', () => {
+        let reduced: boolean;
+        let onChange: ((event: {matches: boolean}) => void) | undefined;
+        beforeEach(() => {
+            reduced = false;
+            onChange = undefined;
+            Object.defineProperty(window, 'matchMedia', {
+                configurable: true,
+                writable: true,
+                value: (query: string) => ({
+                    get matches() { return query === REDUCED_MOTION_QUERY && reduced; },
+                    media: query, onchange: null,
+                    addListener: vi.fn(), removeListener: vi.fn(), dispatchEvent: vi.fn(),
+                    addEventListener: (_type: string, cb: (event: {matches: boolean}) => void) => { onChange = cb; },
+                    removeEventListener: vi.fn(),
+                }),
+            });
+        });
+
+        it('takes the playing loop away and shows the still again', () => {
+            render(<WorldDiptych/>);
+            scrollIntoView();
+            expect(loop()).not.toBeNull();
+            reduced = true;
+            act(() => onChange?.({matches: true}));
+            expect(loop()).toBeNull();
+            expect(screen.queryByRole('button')).toBeNull();
+            expect(image3d()).toHaveStyle({opacity: '1'});
+        });
+
+        it('never starts the loop if it was turned on before the box came into view', () => {
+            render(<WorldDiptych/>);
+            reduced = true;
+            scrollIntoView();
+            expect(loop()).toBeNull();
+        });
+    });
+
+    it('keeps the still when matchMedia throws', () => {
+        Object.defineProperty(window, 'matchMedia', {
+            configurable: true,
+            writable: true,
+            value: () => { throw new Error('matchMedia is not supported'); },
+        });
+        render(<WorldDiptych/>);
+        expect(observed).toHaveLength(0);
+        expect(image3d()).toHaveAttribute('src', HERO_3D_POSTER);
+        expect(loop()).toBeNull();
+    });
+
+    it('keeps the still in a browser without IntersectionObserver', () => {
+        stubMedia();
+        vi.stubGlobal('IntersectionObserver', undefined);
+        render(<WorldDiptych/>);
+        expect(image3d()).toHaveAttribute('src', HERO_3D_POSTER);
         expect(loop()).toBeNull();
     });
 
