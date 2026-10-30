@@ -4,6 +4,12 @@ All notable changes to the Roam website are documented here.
 
 ## [Unreleased]
 
+### Fixed
+
+- `CHANGELOG.md` still listed 0.3.5's changes (the hero's video loop, the diptych share card and the `PLAY_3D_URL` docs fix) under `[Unreleased]` after 0.3.5 was released on 2026-10-30. They are now filed under `[0.3.5]`.
+
+## [0.3.5] - 2026-10-30
+
 ### Changed
 
 - The home page hero's 3D day-and-night loop is now a short muted video, `public/hero/roam-3d.webm` (VP9, 253 KB) with `public/hero/roam-3d.mp4` (H.264, 238 KB) as the fallback, in place of the 1.03 MB `roam-3d.gif`, which is removed. It is encoded from the same 36 frames, now at the still's 640 × 640 rather than 420 × 420, by `scripts/hero/render_hero.py`. The rules for when it plays are unchanged: only after the page has loaded and the hero is on screen, never for visitors who prefer reduced motion or save data (they get no video element at all), and with a pause button that now holds the current frame. The still is the video's poster.
