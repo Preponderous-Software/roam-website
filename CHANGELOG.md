@@ -7,6 +7,7 @@ All notable changes to the Roam website are documented here.
 ### Fixed
 
 - `CHANGELOG.md` still listed 0.3.5's changes (the hero's video loop, the diptych share card and the `PLAY_3D_URL` docs fix) under `[Unreleased]` after 0.3.5 was released on 2026-10-30. They are now filed under `[0.3.5]`.
+- `CONFIG.md`'s "Off-site links" section called the footer's danielstephenson.dev link the one link not in `utils/site.ts`, but `components/WorldDiptych.tsx` also writes its roam-usd and Strata credit links inline. The section now names all three.
 
 ## [0.3.5] - 2026-10-30
 
