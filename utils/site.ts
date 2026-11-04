@@ -15,9 +15,10 @@ export const PLAY_URL = '/play';
 // The same build with its opt-in 3D view (Roam's RFC 0017, off by default).
 export const PLAY_3D_URL = `${PLAY_URL}?view=3d`;
 
-// The production origin. Canonical links, og:url, absolute og:image URLs, the
-// sitemap and robots.txt are all built from it. It is a constant rather than a
-// build-time env var so a build made without one can never advertise localhost.
+// The production origin. Canonical links, og:url, absolute og:image URLs and the
+// sitemap are all built from it; public/robots.txt is static and repeats it by
+// hand. It is a constant rather than a build-time env var so a build made
+// without one can never advertise localhost.
 export const SITE_ORIGIN = 'https://roam.preponderous.org';
 
 // Turns a site path (e.g. "/download") into an absolute production URL.
