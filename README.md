@@ -15,7 +15,7 @@ procedurally-generated 2D world and interact with your surroundings.
 </p>
 <p align="center"><em>The <code>/play</code> page: the real game running in the browser via Pyodide.</em></p>
 
-<sub>How these were captured: headless Chromium (Playwright) against the live site on 2026-10-18 at 1280×800 and 390×844; the GIF is a sequence of real screenshots of <code>/play</code> taken while WASD was held.</sub>
+<sub>How these were captured: headless Chromium (Playwright) against the live site on 2026-10-18 at 1280×800 and 390×844; the GIF is a sequence of real screenshots of <code>/play</code> taken while WASD was held. The home page shots predate the 2D / 3D pair added under the hero's buttons in 0.3.4, so they do not show it.</sub>
 
 The site is a small [Next.js](https://nextjs.org/) + [MUI](https://mui.com/) app, built as
 a sibling of [preponderous-dot-org](https://github.com/Preponderous-Software/preponderous-dot-org)

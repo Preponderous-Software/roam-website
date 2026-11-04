@@ -50,8 +50,10 @@ same build with its 3D view turned on, linked from the caption of the 3D image u
 ([`components/WorldDiptych.tsx`](components/WorldDiptych.tsx)).
 
 `SITE_ORIGIN` (`https://roam.preponderous.org`) is the production origin that canonical links,
-`og:url`, the absolute share-image URLs, `/sitemap.xml` and `public/robots.txt` are built from. A
-new page passes its own `path` to `<Seo>` and is added to `SITEMAP_PATHS` beside it.
+`og:url`, the absolute share-image URLs and `/sitemap.xml` are built from. `public/robots.txt` is a
+static file that spells out the same origin in its `Sitemap:` line, so a new origin has to be
+written there by hand. A new page passes its own `path` to `<Seo>` and is added to `SITEMAP_PATHS`
+beside it.
 
 Three links are not in `utils/site.ts`. The footer's "More by Daniel Stephenson →
 danielstephenson.dev" portfolio link is written directly into `BottomBar.tsx` because
@@ -88,7 +90,8 @@ Images live in `public/`:
   a card, the 3D half rendered with [Strata](https://github.com/Preponderous-Software/strata), and
   the title in a band below. It is made by `scripts/hero/render_hero.py --card`
   ([`scripts/hero/README.md`](scripts/hero/README.md)); its alt text is in `scripts/hero/og-card.json`
-- `sprites/*.png` — the game's 32×32 sprites used in the hero strip
+- `sprites/*.png` — the game's 32×32 sprites. The hero strip shows the 15 named in `SPRITES` in
+  [`components/SpriteStrip.tsx`](components/SpriteStrip.tsx); `grass.png` is not one of them
 - `colormode/{light,dark}.svg` — the sun/moon glyphs painted onto the color-mode toggle
   thumb by [`components/ColorModeToggleSwitch.tsx`](components/ColorModeToggleSwitch.tsx),
   which `TopBar` and `BottomBar` render on every page

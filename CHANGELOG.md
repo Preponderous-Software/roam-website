@@ -8,6 +8,10 @@ All notable changes to the Roam website are documented here.
 
 - `CHANGELOG.md` still listed 0.3.5's changes (the hero's video loop, the diptych share card and the `PLAY_3D_URL` docs fix) under `[Unreleased]` after 0.3.5 was released on 2026-10-30. They are now filed under `[0.3.5]`.
 - `CONFIG.md`'s "Off-site links" section called the footer's danielstephenson.dev link the one link not in `utils/site.ts`, but `components/WorldDiptych.tsx` also writes its roam-usd and Strata credit links inline. The section now names all three.
+- `CONFIG.md` and the comment on `SITE_ORIGIN` in `utils/site.ts` said `public/robots.txt` is built from `SITE_ORIGIN`, but it is a static file that repeats the origin by hand. Both now say so.
+- `CONFIG.md` said `public/sprites/*.png` are used in the hero strip, but `components/SpriteStrip.tsx` shows 15 of the 16 and leaves out `grass.png`. It now says which.
+- `README.md`'s home page screenshots were captured before 0.3.4 added the 2D / 3D pair under the hero's buttons, and the capture note did not say the pair is missing from them. It now does.
+- The comment in `scripts/hero/og-card.json`, and the line in `scripts/hero/render_hero.py` that writes it, named `Components/Seo.tsx`, a path that does not exist. Both now name `components/Seo.tsx`.
 
 ## [0.3.5] - 2026-10-30
 

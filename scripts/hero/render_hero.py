@@ -334,7 +334,7 @@ def make_card(out: Path, public: Path) -> Path:
     dest = public / "og-roam-2d-3d.png"
     card.convert("RGB").save(dest, optimize=True)
     spec = {
-        "comment": "The link-preview card; made by scripts/hero/render_hero.py --card. Components/Seo.tsx's OG_IMAGE_ALT must equal alt.",
+        "comment": "The link-preview card; made by scripts/hero/render_hero.py --card. components/Seo.tsx's OG_IMAGE_ALT must equal alt.",
         "png": "public/og-roam-2d-3d.png",
         "width": CARD_W,
         "height": CARD_H,
