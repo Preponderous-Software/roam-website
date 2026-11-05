@@ -47,7 +47,7 @@ interface BottomBarProps {
 }
 
 // The footer version is this website's version (from package.json); the game's
-// own release version is shown on the download cards. Source Code / Report a Bug
+// own release version is shown on the download section's Latest chip. Source Code / Report a Bug
 // point at this website's repo so feedback about the site lands in the right place,
 // while Discord points at the Preponderous community server shared by all the games.
 const BottomBar: React.FC<BottomBarProps> = ({version}) => {
