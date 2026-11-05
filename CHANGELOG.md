@@ -6,6 +6,14 @@ All notable changes to the Roam website are documented here.
 
 ### Fixed
 
+- `CHANGELOG.md` still listed 0.3.6's changes under `[Unreleased]` after 0.3.6 was released on 2026-11-05. They are now filed under `[0.3.6]`.
+- The comment in `components/BottomBar.tsx` said the game's release version is shown on the download cards, but the cards show no version. It is on the `Latest` chip in `components/DownloadSection.tsx`, and the comment now says so.
+- The comment at the top of `utils/usage-reporting.ts` said only `middleware.ts` imports the module, but `utils/page-view-reporting.ts` imports it too. It now says the module is only reached from `middleware.ts`.
+
+## [0.3.6] - 2026-11-05
+
+### Fixed
+
 - `CHANGELOG.md` still listed 0.3.5's changes (the hero's video loop, the diptych share card and the `PLAY_3D_URL` docs fix) under `[Unreleased]` after 0.3.5 was released on 2026-10-30. They are now filed under `[0.3.5]`.
 - `CONFIG.md`'s "Off-site links" section called the footer's danielstephenson.dev link the one link not in `utils/site.ts`, but `components/WorldDiptych.tsx` also writes its roam-usd and Strata credit links inline. The section now names all three.
 - `CONFIG.md` and the comment on `SITE_ORIGIN` in `utils/site.ts` said `public/robots.txt` is built from `SITE_ORIGIN`, but it is a static file that repeats the origin by hand. Both now say so.

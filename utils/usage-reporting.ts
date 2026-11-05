@@ -6,7 +6,7 @@
 // https://github.com/Stephenson-Software/trace/blob/main/docs/decisions/0002-website-page-views.md
 //
 // The key is read from USAGE_REPORTING_KEY and nowhere else: it is never
-// committed and never reaches the browser (this module is only imported by
+// committed and never reaches the browser (this module is only reached from
 // middleware.ts). No key means reporting is silently off.
 //
 // Runs in the Edge runtime, so it uses nothing beyond what trace-client.ts does.
