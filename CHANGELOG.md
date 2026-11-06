@@ -9,6 +9,9 @@ All notable changes to the Roam website are documented here.
 - `CHANGELOG.md` still listed 0.3.6's changes under `[Unreleased]` after 0.3.6 was released on 2026-11-05. They are now filed under `[0.3.6]`.
 - The comment in `components/BottomBar.tsx` said the game's release version is shown on the download cards, but the cards show no version. It is on the `Latest` chip in `components/DownloadSection.tsx`, and the comment now says so.
 - The comment at the top of `utils/usage-reporting.ts` said only `middleware.ts` imports the module, but `utils/page-view-reporting.ts` imports it too. It now says the module is only reached from `middleware.ts`.
+- The "How to play" panel's Desktop mode said "Download a build above", but the panel is also on the home page, which has no download grid above it. "Download a build" is now a link to `/download`.
+- The home page's "Two ways to play" card left out the browser, which the "How to play" panel and the hero both offer. It is now "Three ways to play" and names it.
+- The download page's description said "build from source on Linux", but the Linux card says "Run from source" and there is no build step. The description now says "run from source".
 
 ## [0.3.6] - 2026-11-05
 
