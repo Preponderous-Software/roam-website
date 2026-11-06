@@ -18,7 +18,7 @@ const DownloadPage: NextPage = () => (
         <Seo
             title="Download"
             path="/download"
-            description="Download Roam for Windows, macOS, or build from source on Linux. Free and source-available."
+            description="Download Roam for Windows, macOS, or run from source on Linux. Free and source-available."
         />
         <TopBar/>
         <Container component="main" id="main" maxWidth="lg" sx={{py: 4, flexGrow: 1}}>

@@ -33,8 +33,8 @@
     {
       "id": "modes",
       "icon": "terminal",
-      "title": "Two ways to play",
-      "description": "Play the full graphical game, or drop into the built-in text mode (--text) to roam from any terminal — over SSH, on a Chromebook, or headless."
+      "title": "Three ways to play",
+      "description": "Play the full graphical game, drop into the built-in text mode (--text) to roam from any terminal — over SSH, on a Chromebook, or headless — or run it in your browser with no install."
     }
   ]
 }

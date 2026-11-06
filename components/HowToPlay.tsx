@@ -1,4 +1,4 @@
-import {Box, Button, Chip, Grid, Paper, Stack, Typography} from '@mui/material';
+import {Box, Button, Chip, Grid, Link, Paper, Stack, Typography} from '@mui/material';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
 import TerminalIcon from '@mui/icons-material/Terminal';
 import PublicIcon from '@mui/icons-material/Public';
@@ -54,8 +54,8 @@ const HowToPlay: React.FC = () => (
             <Grid item xs={12} md={4}>
                 <Mode icon={<DesktopWindowsIcon/>} title="Desktop">
                     <Typography variant="body2" color="text.secondary">
-                        Download a build above, launch it, and start roaming. Move around the
-                        world, gather wood and stone, craft tools, and keep yourself fed. The full
+                        <Link href="/download">Download a build</Link>, launch it, and start roaming.
+                        Move around the world, gather wood and stone, craft tools, and keep yourself fed. The full
                         control list is shown in-game and in the{' '}
                         <a href={`${REPO_URL}#getting-started`} target="_blank" rel="noopener noreferrer">
                             README
