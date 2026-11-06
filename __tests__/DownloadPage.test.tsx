@@ -64,7 +64,7 @@ describe('Download page', () => {
         expect(container.querySelector('title')).toHaveTextContent('Download — Roam');
         expect(container.querySelector('meta[name="description"]')).toHaveAttribute(
             'content',
-            'Download Roam for Windows, macOS, or build from source on Linux. Free and source-available.'
+            'Download Roam for Windows, macOS, or run from source on Linux. Free and source-available.'
         );
     });
 });

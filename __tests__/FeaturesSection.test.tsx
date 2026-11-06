@@ -42,6 +42,14 @@ describe('FeaturesSection', () => {
         }
     });
 
+    it('counts every mode the how-to-play panel lists on the ways-to-play card', () => {
+        render(<FeaturesSection/>);
+        const card = cardFor('Three ways to play');
+        expect(card).toHaveTextContent('graphical game');
+        expect(card).toHaveTextContent('text mode');
+        expect(card).toHaveTextContent('in your browser');
+    });
+
     it('renders the MUI icon mapped to each feature\'s icon key', () => {
         render(<FeaturesSection/>);
         for (const feature of featuresData.features) {

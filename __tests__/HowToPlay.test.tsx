@@ -17,6 +17,16 @@ describe('HowToPlay', () => {
         expect(screen.getByText('python src/roam.py --text')).toBeInTheDocument();
     });
 
+    // The panel is on the home page too, which has no download grid above it, so
+    // the desktop mode links to the download page rather than pointing up the page.
+    it('links the desktop mode to the download page in the same tab', () => {
+        render(<HowToPlay/>);
+        const download = screen.getByRole('link', {name: 'Download a build'});
+        expect(download).toHaveAttribute('href', '/download');
+        expect(download).not.toHaveAttribute('target');
+        expect(screen.queryByText(/build above/)).not.toBeInTheDocument();
+    });
+
     it('describes the browser mode as live rather than planned', () => {
         render(<HowToPlay/>);
         expect(screen.queryByText('Planned')).not.toBeInTheDocument();
