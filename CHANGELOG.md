@@ -6,6 +6,12 @@ All notable changes to the Roam website are documented here.
 
 ### Fixed
 
+- `CHANGELOG.md` still listed 0.3.7's changes (the corrected source comments and the home and download page copy) under `[Unreleased]` after 0.3.7 was released on 2026-11-07. They are now filed under `[0.3.7]`.
+
+## [0.3.7] - 2026-11-07
+
+### Fixed
+
 - `CHANGELOG.md` still listed 0.3.6's changes under `[Unreleased]` after 0.3.6 was released on 2026-11-05. They are now filed under `[0.3.6]`.
 - The comment in `components/BottomBar.tsx` said the game's release version is shown on the download cards, but the cards show no version. It is on the `Latest` chip in `components/DownloadSection.tsx`, and the comment now says so.
 - The comment at the top of `utils/usage-reporting.ts` said only `middleware.ts` imports the module, but `utils/page-view-reporting.ts` imports it too. It now says the module is only reached from `middleware.ts`.
