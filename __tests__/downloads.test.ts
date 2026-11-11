@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
 import {buildDownloads} from '../utils/downloads';
-import {releaseAssetUrl, LATEST_VERSION} from '../utils/site';
+import {releaseAssetUrl, LATEST_VERSION, RELEASES_URL, REPO_URL} from '../utils/site';
 
 describe('releaseAssetUrl', () => {
     it('builds a GitHub release asset download URL from version + filename', () => {
@@ -33,5 +33,26 @@ describe('buildDownloads', () => {
     it('defaults to LATEST_VERSION when no version is passed', () => {
         const windows = buildDownloads().find((d) => d.id === 'windows')!;
         expect(windows.links[0].href).toContain(`/${LATEST_VERSION}/`);
+    });
+
+    // The asset-naming table in CONFIG.md, one row per direct download. If an
+    // upstream release renames an asset, this and CONFIG.md change together.
+    it('builds every direct download from the asset names CONFIG.md documents', () => {
+        const direct = buildDownloads('9.9.9')
+            .flatMap((platform) => platform.links)
+            .filter((link) => link.download)
+            .map((link) => link.href);
+        expect(direct).toEqual([
+            releaseAssetUrl('9.9.9', 'Roam-9.9.9-Setup.exe'),
+            releaseAssetUrl('9.9.9', 'Roam-9.9.9-windows-portable.zip'),
+            releaseAssetUrl('9.9.9', 'Roam-9.9.9.dmg'),
+        ]);
+    });
+
+    it('links Linux to running from source and the releases page, with no direct download', () => {
+        const linux = buildDownloads('9.9.9').find((d) => d.id === 'linux')!;
+        expect(linux.links.map((l) => l.href)).toEqual([`${REPO_URL}#getting-started`, RELEASES_URL]);
+        expect(linux.links.some((l) => l.download)).toBe(false);
+        expect(linux.links.some((l) => l.href.includes('9.9.9'))).toBe(false);
     });
 });
