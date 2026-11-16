@@ -6,6 +6,12 @@ All notable changes to the Roam website are documented here.
 
 ### Fixed
 
+- `CHANGELOG.md` still listed 0.3.8's change (filing 0.3.7's entries under `[0.3.7]`) under `[Unreleased]` after 0.3.8 was released on 2026-11-16. It is now filed under `[0.3.8]`.
+
+## [0.3.8] - 2026-11-16
+
+### Fixed
+
 - `CHANGELOG.md` still listed 0.3.7's changes (the corrected source comments and the home and download page copy) under `[Unreleased]` after 0.3.7 was released on 2026-11-07. They are now filed under `[0.3.7]`.
 
 ## [0.3.7] - 2026-11-07
