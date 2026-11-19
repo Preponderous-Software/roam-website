@@ -95,18 +95,18 @@ switch below also stops it: with reporting off no ID is made, read or written.
 
 Reporting is off unless a key is set, and any of these turns it off:
 
-- `USAGE_REPORTING_ENABLED=false` in the server's environment (also `0`, `no`, `off`; case and surrounding
-  space do not matter)
-- `TRACE_USAGE_REPORTING=off` in the environment (also `false`, `0`, `no`; shared by every program
-  that reports to trace, and it wins over the setting above)
-- `DO_NOT_TRACK=1` in the environment (also `true`, `yes`; see
+- `USAGE_REPORTING_ENABLED=false` in the server's environment (set to any value but `true`, `on`,
+  `yes` or `1` turns it off, so empty, `off`, `disabled` or a typo does too)
+- `TRACE_USAGE_REPORTING=off` in the environment (any value but empty, `true`, `on`, `yes` or `1`;
+  shared by every program that reports to trace, and it wins over the setting above)
+- `DO_NOT_TRACK=1` in the environment (any value but empty, `0`, `false`, `off` or `no`; see
   [consoledonottrack.com](https://consoledonottrack.com))
 - leaving `USAGE_REPORTING_KEY` unset
 
 `USAGE_REPORTING_ENDPOINT` sends the reports to a different trace server. On the first request
 its middleware sees (any path outside `/_next/` and `/api/` without a file extension), the server logs one line saying whether reporting is on and, if it is off, which switch
 turned it off. The only case with no line is a missing key with none of the other switches set,
-so a site that was never configured stays quiet. Details: https://github.com/Stephenson-Software/trace#usage-reporting
+so a site that was never configured stays quiet. Details: https://danielstephenson.dev/usage-reporting
 
 ## License
 

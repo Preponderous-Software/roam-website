@@ -6,6 +6,7 @@ All notable changes to the Roam website are documented here.
 
 ### Fixed
 
+- Usage reporting stays off once it is turned off. `USAGE_REPORTING_ENABLED` now keeps page-view reporting on only when unset or an on-value (`true`, `on`, `yes`, `1`); any other value, such as empty, `disabled` or a typo, turns it off, where only `false`, `0`, `no` and `off` did before. The vendored trace client (`utils/trace-client.ts`) moves from 0.4.0 to 0.5.0, which does the same for `TRACE_USAGE_REPORTING` (anything but empty or an on-value is off) and `DO_NOT_TRACK` (anything but empty, `0`, `false`, `off` or `no` is off), and treats an environment it cannot read as an opt-out.
 - `CHANGELOG.md` still listed 0.3.8's change (filing 0.3.7's entries under `[0.3.7]`) under `[Unreleased]` after 0.3.8 was released on 2026-11-16. It is now filed under `[0.3.8]`.
 
 ## [0.3.8] - 2026-11-16
